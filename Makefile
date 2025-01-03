@@ -1,46 +1,32 @@
-# Compiler and flags
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+SRC = ./ft_printf_bonus.c\
+	  ./ft_print_helpers.c\
+	  ./ft_printf_utils.c\
+	  ./ft_printf_formatter.c
 
-# Directories
-LIBFTDIR = ./libft
-SRCDIR = .
-OBJDIR = ./obj
-INCDIR = ./libft
-
-# Files
-NAME = ft_printf
-LIBFT = $(LIBFTDIR)/libft.a
-
-# List of .c files in the root directory
-SRC = ft_printf.c parse_flags.c parse_width.c parse_precision.c parse_specifier.c apply_specifier.c
 OBJ = $(SRC:.c=.o)
 
-# The rule to build the final executable
-$(NAME): $(OBJ) $(LIBFT)
-	$(CC) $(OBJ) $(LIBFT) -o $(NAME)
+CC = cc
 
-# Rule for compiling .c files into .o files (objects)
-%.o: %.c
-	$(CC) $(CFLAGS) -I$(INCDIR) -c $< -o $@
+CFLAGS += -Wall -Werror -Wextra -I. -I$(DIR_LIB)
 
-# Include the libft functions
-$(LIBFT):
-	make -C $(LIBFTDIR)
+LIB_NAME = ft
 
-# Clean up the object files
+DIR_LIBFT = ./libft
+
+NAME = libftprintf.a
+
+$(DIR_LIBFT)/libft.a:
+	$(MAKE) -C $(DIR_LIBFT)
+
+$(NAME): $(OBJ) $(DIR_LIBFT)/libft.a
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) -L$(DIR_LIBFT) -l$(LIB_NAME)
+
+all: $(NAME)
+
 clean:
 	rm -f $(OBJ)
-	make -C $(LIBFTDIR) clean
 
-# Remove all built files (object files, executables, etc.)
 fclean: clean
 	rm -f $(NAME)
 
-# Rebuild everything from scratch
 re: fclean all
-
-# Optional: run the bonus flag build (if you have any bonus target)
-bonus: $(OBJ) $(LIBFT)
-	$(CC) $(OBJ) $(LIBFT) -o $(NAME)
-

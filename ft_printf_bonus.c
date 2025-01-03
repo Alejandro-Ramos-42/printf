@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_printf_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 09:31:38 by alex              #+#    #+#             */
-/*   Updated: 2025/01/03 19:05:27 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/03 20:02:25 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
-void	specifier(const char **str, t_format *format, va_list args, int *printed_chars)
+void	bonus(const char **str, t_format *format, va_list args, int *printed_chars)
 {
+	*format = (t_format){0, 0, -1, 0};
+	parse_flags(str, format);
+	parse_width(str, format, args);
+	parse_precision(str, format, args);
 	parse_specifier(str, format);
 	apply_specifier(format, args, printed_chars);
 }
@@ -23,6 +27,7 @@ int	ft_printf(const char *str, ...)
 {
 	va_list		args;
 	int			printed_chars;
+	t_format	format;
 
 	printed_chars = 0;
 	va_start(args, str);
@@ -31,7 +36,7 @@ int	ft_printf(const char *str, ...)
 		if (*str == '%')
 		{
 			str++;
-			specifier(&str, &format, args, &printed_chars);
+			bonus(&str, &format, args, &printed_chars);
 		}
 		else
 		{

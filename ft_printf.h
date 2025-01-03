@@ -6,14 +6,14 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 09:45:33 by alex              #+#    #+#             */
-/*   Updated: 2024/12/31 19:55:50 by alex             ###   ########.fr       */
+/*   Updated: 2025/01/03 18:38:52 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include "../libft/libft.h"
+#include "libft/libft.h"
 
 #define FLAG_MINUS	1
 #define FLAG_ZERO	2
