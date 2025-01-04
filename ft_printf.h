@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.h                                      :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 09:45:33 by alex              #+#    #+#             */
-/*   Updated: 2025/01/03 18:38:52 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/04 17:40:19 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,3 +39,5 @@ void	print_padding(const char *str, t_format *format, int *printed_chars);
 void	print_i_formatted(int n, t_format *format, int *printed_chars);
 void	print_u_formatted(unsigned int n, t_format *format, int *printed_chars);
 void	print_hx(unsigned int n, t_format *format, int upp, int *printed_chars);
+
+

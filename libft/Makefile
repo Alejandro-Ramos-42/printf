@@ -47,13 +47,16 @@ BSRC = ft_lstnew.c\
 OBJ = $(SRC:.c=.o)
 BOBJ = $(BSRC:.c=.o)
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -I.
+CFLAGS = -Wall -Werror -Wextra -fPIC
 NAME = libft.a
 
 $(NAME): $(OBJ)
 	ar rcs $(NAME) $(OBJ)
 
-bonus: $(NAME) $(OBJ) $(BOBJ)
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+bonus: $(NAME) $(BOBJ)
 	ar rcs $(NAME) $(BOBJ)
 
 all: $(NAME)

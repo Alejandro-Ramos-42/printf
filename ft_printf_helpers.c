@@ -6,13 +6,13 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 15:20:33 by alex              #+#    #+#             */
-/*   Updated: 2024/12/31 19:59:27 by alex             ###   ########.fr       */
+/*   Updated: 2025/01/04 15:28:31 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
-static void	parse_flags(const char **str, t_format *format)
+void	parse_flags(const char **str, t_format *format)
 {
 	while (**str == '-' || **str == '0' || **str == '#' || \
 **str == '+' || **str == ' ')
@@ -69,6 +69,6 @@ void	parse_precision(const char **str, t_format *format, va_list args)
 
 void	parse_specifier(const char **str, t_format *format)
 {
-	format -> specifier = **str;
+	format -> f_specifier = **str;
 	(*str)++;
 }

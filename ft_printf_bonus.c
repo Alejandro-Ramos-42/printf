@@ -6,13 +6,13 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 09:31:38 by alex              #+#    #+#             */
-/*   Updated: 2025/01/03 20:02:25 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/04 17:39:59 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	bonus(const char **str, t_format *format, va_list args, int *printed_chars)
+static void	bonus(const char **str, t_format *format, va_list args, int *printed_chars)
 {
 	*format = (t_format){0, 0, -1, 0};
 	parse_flags(str, format);

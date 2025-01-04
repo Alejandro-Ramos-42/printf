@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 20:00:37 by alex              #+#    #+#             */
-/*   Updated: 2024/12/31 20:40:44 by alex             ###   ########.fr       */
+/*   Updated: 2025/01/04 16:37:41 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	print_padding(const char *str, t_format *format, int *printed_chars)
 	{
 		while (padding--)
 		{
-			ft_putchar_fd(' ', 1)
+			ft_putchar_fd(' ', 1);
 			(*printed_chars)++;
 		}
 	}
