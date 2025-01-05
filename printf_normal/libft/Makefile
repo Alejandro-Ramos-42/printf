@@ -32,7 +32,10 @@ SRC = \
 	ft_putchar_fd.c\
 	ft_putstr_fd.c\
 	ft_putendl_fd.c\
-	ft_putnbr_fd.c
+	ft_putnbr_fd.c\
+	ft_putunbr_fd.c\
+	ft_print_memory.c\
+	ft_print_hex_low.c
 
 BSRC = ft_lstnew.c\
 		ft_lstadd_front.c\
