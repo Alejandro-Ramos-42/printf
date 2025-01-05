@@ -1,5 +1,5 @@
 # Compiler and Flags
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 # Directories
@@ -11,10 +11,9 @@ NAME = libftprintf.a
 LIBFT = $(LIBFTDIR)/libft.a
 
 # Source Files in the Root Directory
-SRC = ./ft_printf_bonus.c\
-	  ./ft_printf_helpers.c\
-	  ./ft_printf_utils.c\
-	  ./ft_printf_formatter.c
+SRC = ./ft_printf.c\
+	  ./apply_specifiers.c
+
 OBJ = $(SRC:.c=.o)
 
 # Create the static library for ft_printf
