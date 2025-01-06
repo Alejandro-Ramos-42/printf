@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 20:41:11 by alex              #+#    #+#             */
-/*   Updated: 2025/01/06 18:26:19 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/06 18:50:51 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	apply_specifier(t_format *format, va_list *args, int *printed_chars)
 {
-	char *str;
+	char	*str;
 
 	if (format-> f_specifier == 'c')
 		*printed_chars += ft_putchar_fd((char)va_arg(*args, int), 1);

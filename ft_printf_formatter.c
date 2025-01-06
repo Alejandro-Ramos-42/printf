@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 20:00:37 by alex              #+#    #+#             */
-/*   Updated: 2025/01/05 12:28:26 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/06 19:24:14 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ void	print_padding(const char *str, t_format *format, int *printed_chars)
 	int	padding;
 
 	len = ft_strlen(str);
-	if (format -> precision >= 0 && format -> precision < len)
+	if (format -> precision >= 0 && format -> precision < len) //Obtain max chars to print
 		len = format -> precision;
 	padding = 0;
 	if (format -> width > len)
-		padding = format -> width - len;
+		padding = format -> width - len; //Obtain amount to pad after
 	if (!(format -> flags & FLAG_MINUS))
 	{
 		while (padding--)

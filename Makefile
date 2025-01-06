@@ -12,8 +12,8 @@ LIBFT = $(LIBFTDIR)/libft.a
 
 # Source Files in the Root Directory
 SRC = ./ft_printf_bonus.c\
-	  ./ft_printf_helpers.c\
-	  ./ft_printf_utils.c\
+	  ./parsing.c\
+	  ./apply_specifiers.c\
 	  ./ft_printf_formatter.c
 OBJ = $(SRC:.c=.o)
 
