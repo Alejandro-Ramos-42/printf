@@ -6,7 +6,7 @@
 /*   By: aramos <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 17:29:26 by aramos            #+#    #+#             */
-/*   Updated: 2025/01/05 18:11:03 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/06 17:18:31 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	ft_putendl_fd(char *s, int fd);
 int		ft_putnbr_fd(int n, int fd);
 int		ft_putunbr_fd(unsigned int n, int fd);
 int		ft_print_memory(void *addr);
-int		ft_print_hex(int n);
+int		ft_print_hex(int n, int upper);
 
 //Lists
 t_list	*ft_lstnew(void *content);
