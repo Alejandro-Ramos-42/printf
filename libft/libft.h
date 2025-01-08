@@ -6,7 +6,7 @@
 /*   By: aramos <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 17:29:26 by aramos            #+#    #+#             */
-/*   Updated: 2025/01/08 15:02:50 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/08 18:36:35 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ size_t	ft_strlen(const char *s);
 
 //Memory handling
 void	*ft_memset(void *s, int c, size_t n);
-char	*ft_bzero(void *s, size_t n);
-char	*ft_bspace(void *s, size_t n);
+void	ft_bzero(void *s, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 void	*ft_memmove(void *dest, const void *src, size_t n);
 void	*ft_memchr(const void *s, int c, size_t n);

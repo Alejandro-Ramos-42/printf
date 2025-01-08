@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 20:00:37 by alex              #+#    #+#             */
-/*   Updated: 2025/01/08 15:11:25 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/08 19:20:31 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	print_padding(const char *str, t_format *format, va_list args, int *printed
 
 	len = ft_strlen(str);
 	padding = 0;
-	if (format -> width > len)//width more than len. pads
+	if (format -> width > len)//width more than len, pad
 		padding = format -> width - len;
 	if (format -> width == '*' && va_arg(args, int) > len)//arg more than len, pads
 		padding = va_arg(args, int) - len;
@@ -41,7 +41,7 @@ void	print_padding(const char *str, t_format *format, va_list args, int *printed
 			(*printed_chars) += ft_putchar_fd(' ', 1);
 	}
 }
-
+//
 //	if (!(format -> flags & FLAG_MINUS))//check if pad is needed to the right(default)
 //	{
 //		while (padding--)
@@ -68,20 +68,22 @@ void	print_i_formatted(int n, t_format *format, va_list args, int *printed_chars
 	padding = 0;
 	if (format -> width > len || format -> precision > len)
 	{
-		if (format -> flags & FLAG_ZERO)
-		{
-			padding = format -> width - len;
-			if (format -> flags & FLAG_ZERO)
-				new_str = ft_bzero(malloc((padding + len + 1) * sizeof(char)), padding);
-			else
-				new_str = ft_bspace(malloc((padding + len + 1) * sizeof(char)), padding);
-			new_str[padding - 1] = '\0';
-			ft_strlcat(new_str, str, (padding + len + 1));
-		}
+		padding = format -> width - len;
+		new_str = malloc((padding + len + 1) * sizeof(char));
+		if (!new_str)
+			return ;
+		if (format -> flags & FLAG_ZERO)//pad with 0s
+			ft_memset(new_str, '0', padding);
+		else
+			ft_memset(new_str, ' ', padding);//pad with spaces
+		ft_strlcpy(new_str + padding, str, len + 1);
 
 	}
+	else
+		new_str = ft_strdup(str);
 	print_padding(new_str, format, args, printed_chars);
 	free (str);
+	free (new_str);
 }
 
 //void	print_u_formatted(unsigned int n, t_format *format, int *printed_chars)

@@ -1,5 +1,5 @@
 # Compiler and Flags
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 # Directories
@@ -10,12 +10,19 @@ INCDIR = ./libft
 NAME = libftprintf.a
 LIBFT = $(LIBFTDIR)/libft.a
 
-# Source Files in the Root Directory
-SRC = ./ft_printf_bonus.c\
-	  ./parsing_bonus.c\
-	  ./apply_specifiers_bonus.c\
-	  ./ft_printf_formatter_bonus.c
+# Source Files
+SRC = ./ft_printf.c\
+	  ./apply_specifiers.c
+
 OBJ = $(SRC:.c=.o)
+
+#Bonus Files
+BSRC = ./ft_printf_bonus.c\
+	   ./parsing_bonus.c\
+	   ./apply_specifiers_bonus.c\
+	   ./ft_printf_formatter_bonus.c
+
+BOBJ = $(BSRC:.c=.o)
 
 # Create the static library for ft_printf
 $(NAME): $(OBJ) $(LIBFT)
@@ -31,13 +38,17 @@ $(NAME): $(OBJ) $(LIBFT)
 # Build both libft and ft_printf libraries
 all: $(LIBFT) $(NAME)
 
+#Bonus rule
+bonus: $(NAME) $(BOBJ)
+	ar rcs $(NAME) $(BOBJ)
+
 # Build libft first
 $(LIBFT):
 	make -C $(LIBFTDIR)
 
 # Remove object files for ft_printf
 clean:
-	rm -f $(OBJ)
+	rm -f $(OBJ) $(BOBJ)
 	make -C $(LIBFTDIR) clean
 
 # Remove everything, including ft_printf library

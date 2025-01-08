@@ -6,17 +6,16 @@
 /*   By: aramos <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:24:18 by aramos            #+#    #+#             */
-/*   Updated: 2025/01/08 14:59:19 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/08 18:36:19 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_bzero(void *s, size_t n)
+void	ft_bzero(void *s, size_t n)
 {
 	while (n-- > 0)
 		*(char *)s++ = '\0';
-	return (s - n);
 }
 //
 //int	main(void)
