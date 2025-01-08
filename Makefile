@@ -12,9 +12,9 @@ LIBFT = $(LIBFTDIR)/libft.a
 
 # Source Files in the Root Directory
 SRC = ./ft_printf_bonus.c\
-	  ./parsing.c\
-	  ./apply_specifiers.c\
-	  ./ft_printf_formatter.c
+	  ./parsing_bonus.c\
+	  ./apply_specifiers_bonus.c\
+	  ./ft_printf_formatter_bonus.c
 OBJ = $(SRC:.c=.o)
 
 # Create the static library for ft_printf

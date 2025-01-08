@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   apply_specifiers.c                                 :+:      :+:    :+:   */
+/*   apply_specifiers_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 20:41:11 by alex              #+#    #+#             */
-/*   Updated: 2025/01/06 19:38:27 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/08 15:10:10 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
 void	apply_specifier(t_format *format, va_list args, int *printed_chars)
 {
@@ -22,11 +22,10 @@ void	apply_specifier(t_format *format, va_list args, int *printed_chars)
 		str = va_arg(args, char *);
 		if (!str)
 			str = "(null)";
-//		*printed_chars += ft_putstr_fd(str, 1);
-		print_padding(str, format, printed_chars);
+		print_padding(str, format, args, printed_chars);
 	}
 	else if (format-> f_specifier == 'd' || format-> f_specifier == 'i')
-		print_i_formatted(va_arg(args, int), format, printed_chars);
+		print_i_formatted(va_arg(args, int), format, args, printed_chars);
 //	else if (format-> f_specifier == 'u')
 //		print_unsigned_with_format(va_arg(args, unsigned int), format, printed_chars);
 //	else if (format-> f_specifier == 'x')

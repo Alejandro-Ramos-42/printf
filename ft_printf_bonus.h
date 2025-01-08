@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_printf_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 09:45:33 by alex              #+#    #+#             */
-/*   Updated: 2025/01/05 12:32:44 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/08 15:04:50 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 #include "libft/libft.h"
 #include <stdio.h>
 
-#define FLAG_MINUS	1
-#define FLAG_ZERO	2
-#define FLAG_HASH	4
-#define FLAG_PLUS	8
-#define FLAG_SPACE	16
+#define FLAG_MINUS	1//00000001
+#define FLAG_ZERO	2//00000010
+#define FLAG_HASH	4//00000100
+#define FLAG_PLUS	8//00001000
+#define FLAG_SPACE	16//0010000
 
 typedef struct s_format
 {
@@ -36,8 +36,8 @@ void	parse_width(const char **str, t_format *format, va_list args);
 void	parse_precision(const char **str, t_format *format, va_list args);
 void	parse_specifier(const char **str, t_format *format);
 void	apply_specifier(t_format *format, va_list args, int *printed_chars);
-void	print_padding(const char *str, t_format *format, int *printed_chars);
-void	print_i_formatted(int n, t_format *format, int *printed_chars);
+void	print_padding(const char *str, t_format *format, va_list args, int *printed_chars);
+void	print_i_formatted(int n, t_format *format, va_list args, int *printed_chars);
 void	print_u_formatted(unsigned int n, t_format *format, int *printed_chars);
 void	print_hx(unsigned int n, t_format *format, int upp, int *printed_chars);
 
