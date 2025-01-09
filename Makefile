@@ -27,9 +27,10 @@ BOBJ = $(BSRC:.c=.o)
 # Create the static library for ft_printf
 $(NAME): $(OBJ) $(LIBFT)
 	@cp $(LIBFT) .
-	@ar x libft.a
-	@ar rcs $(NAME) $(OBJ) *.o
-	@rm -f *.o libft.a
+	#@ar x libft.a
+	@ar rcs libft.a $(OBJ)
+	mv libft.a $(NAME)
+	#@rm -f *.o libft.a
 
 # Compile .c files into .o files
 %.o: %.c
@@ -40,7 +41,10 @@ all: $(LIBFT) $(NAME)
 
 #Bonus rule
 bonus: $(NAME) $(BOBJ)
-	ar rcs $(NAME) $(BOBJ)
+	@cp $(LIBFT) .
+	#@ar x libft.a
+	@ar rcs libft.a $(BOBJ)
+	mv libft.a $(NAME)
 
 # Build libft first
 $(LIBFT):

@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 09:31:38 by alex              #+#    #+#             */
-/*   Updated: 2025/01/06 18:23:49 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/09 17:28:23 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	ft_printf(const char *str, ...)
 	{
 		if (*str == '%')
 		{
+			printf("Starting Normal printf\n");
 			str++;
 			parse_specifier(&str, &format);
 			apply_specifier(&format, &args, &printed_chars);
