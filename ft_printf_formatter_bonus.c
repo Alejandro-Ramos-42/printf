@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 20:00:37 by alex              #+#    #+#             */
-/*   Updated: 2025/01/09 19:18:06 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/11 10:38:01 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	pbonus_c(char c, t_format *format, int *printed_chars)
 		while (padding-- > 0)
 			(*printed_chars) += ft_putchar_fd(' ', 1);
 	}
+	return ;
 }
 
 void	pbonus_s(const char *str, t_format *format, va_list args, int *printed_chars)

@@ -6,19 +6,18 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 20:41:11 by alex              #+#    #+#             */
-/*   Updated: 2025/01/09 20:09:21 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/11 10:40:20 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-const char	*apply_specifier(const char **str, t_format *format, va_list args, int *printed_chars)
+void	apply_specifier(t_format *format, va_list args, int *printed_chars)
 {
 	//const char	*str;
 	if (format-> f_specifier == 'c')
 		pbonus_c((char)va_arg(args, int), format, printed_chars);
 //	(*str)++;
-	return (*str);
 //	if (format-> f_specifier == 's')
 //	{
 //		str = va_arg(args, char *);
@@ -34,31 +33,6 @@ const char	*apply_specifier(const char **str, t_format *format, va_list args, in
 //		print_hex_with_format(va_arg(args, unsigned int), format, 0, printed_chars);
 //	else if (format-> f_specifier == 'X')
 //		print_hex_with_format(va_arg(args, unsigned int), format, 1, printed_chars);
+	else if (format-> f_specifier == '%')
+		*printed_chars += ft_putchar_fd('%', 1);
 }
-//
-//void	apply_specifier(t_format *format, va_list *args, int *printed_chars)
-//{
-//	char	*str;
-//
-//	if (format-> f_specifier == 'c')
-//		*printed_chars += ft_putchar_fd((char)va_arg(*args, int), 1);
-//	else if (format-> f_specifier == 's')
-//	{
-//		str = va_arg(*args, char *);
-//		if (!str)
-//			str = "(null)";
-//		*printed_chars += ft_putstr_fd(str, 1);
-//	}
-//	else if (format-> f_specifier == 'p')
-//		*printed_chars += ft_print_memory(va_arg(*args, int *));
-//	else if (format-> f_specifier == 'd' || format-> f_specifier == 'i')
-//		*printed_chars += ft_putnbr_fd(va_arg(*args, int), 1);
-//	else if (format-> f_specifier == 'u')
-//		*printed_chars += ft_putunbr_fd(va_arg(*args, int), 1);
-//	else if (format-> f_specifier == 'x')
-//		*printed_chars += ft_print_hex(va_arg(*args, int), 0);
-//	else if (format-> f_specifier == 'X')
-//		*printed_chars += ft_print_hex(va_arg(*args, int), 1);
-//	else if (format-> f_specifier == '%')
-//		*printed_chars += ft_putchar_fd('%', 1);
-//}

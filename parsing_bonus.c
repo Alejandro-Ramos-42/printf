@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 15:20:33 by alex              #+#    #+#             */
-/*   Updated: 2025/01/09 19:42:37 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/11 10:41:04 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,8 @@ void	parse_precision(const char **str, t_format *format, va_list args)
 	}
 }
 
-const char	*parse_specifier(const char **str, t_format *format)
+void	parse_specifier(const char **str, t_format *format)
 {
 	format -> f_specifier = **str;
-	(*str)++;
-	return (*str);
+	//(*str)++;
 }

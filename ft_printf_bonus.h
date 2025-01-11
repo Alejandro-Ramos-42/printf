@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 09:45:33 by alex              #+#    #+#             */
-/*   Updated: 2025/01/09 20:08:32 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/11 09:09:05 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ int		ft_printf(const char *str, ...);
 void	parse_flags(const char **str, t_format *format);
 void	parse_width(const char **str, t_format *format, va_list args);
 void	parse_precision(const char **str, t_format *format, va_list args);
-const char	*parse_specifier(const char **str, t_format *format);
-const char	*apply_specifier(const char **str, t_format *format, va_list args, int *printed_chars);
+void	parse_specifier(const char **str, t_format *format);
+void	apply_specifier(t_format *format, va_list args, int *printed_chars);
 void	pbonus_s(const char *str, t_format *format, va_list args, int *printed_chars);
 void	pbonus_c(char c, t_format *format, int *printed_chars);
 void	pbonus_di(int n, t_format *format, va_list args, int *printed_chars);
