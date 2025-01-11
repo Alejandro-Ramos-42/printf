@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 20:41:11 by alex              #+#    #+#             */
-/*   Updated: 2025/01/11 10:40:20 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/11 10:51:25 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,18 @@
 
 void	apply_specifier(t_format *format, va_list args, int *printed_chars)
 {
-	//const char	*str;
+	const char	*str;
+
 	if (format-> f_specifier == 'c')
 		pbonus_c((char)va_arg(args, int), format, printed_chars);
 //	(*str)++;
-//	if (format-> f_specifier == 's')
-//	{
-//		str = va_arg(args, char *);
-//		if (!str)
-//			str = "(null)";
-//		print_padding(str, format, args, printed_chars);
-//	}
+	if (format-> f_specifier == 's')
+	{
+		str = va_arg(args, char *);
+		if (!str)
+			str = "(null)";
+		pbonus_s(str, format, args, printed_chars);
+	}
 //	else if (format-> f_specifier == 'd' || format-> f_specifier == 'i')
 //		print_i_formatted(va_arg(args, int), format, args, printed_chars);
 //	else if (format-> f_specifier == 'u')

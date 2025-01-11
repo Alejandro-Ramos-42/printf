@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 20:00:37 by alex              #+#    #+#             */
-/*   Updated: 2025/01/11 10:38:01 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/11 11:13:59 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	pbonus_c(char c, t_format *format, int *printed_chars)
 		while (padding-- > 0)
 			(*printed_chars) += ft_putchar_fd(' ', 1);
 	}
-	return ;
 }
 
 void	pbonus_s(const char *str, t_format *format, va_list args, int *printed_chars)
@@ -44,16 +43,16 @@ void	pbonus_s(const char *str, t_format *format, va_list args, int *printed_char
 		padding = va_arg(args, int) - len;
 	if (format -> precision >= 0 && format -> precision < len)//precision less than len, cuts
 		len = format -> precision;
-	if (format -> width > format -> precision)//width more than precision, pads
+	if (format -> width > format -> precision && format -> precision != -1)//width more than precision, pads
 		padding = format -> width - format -> precision;
 	if (!(format -> flags & FLAG_MINUS))//check if pad is needed to the right(default)
 	{
-		while (padding--)
+		while (padding--) 
 			(*printed_chars) += ft_putchar_fd(' ', 1);
 	}
 	write(1, str, len);//prints with pad if necessary
 	*printed_chars += len;
-	if (format -> flags & FLAG_MINUS && format -> f_specifier != 'd' 
+	if (format -> flags & FLAG_MINUS && format -> f_specifier != 'd'
 			&& format -> f_specifier != 'i')//check if we need to pad to the left
 	{
 		while (padding--)
