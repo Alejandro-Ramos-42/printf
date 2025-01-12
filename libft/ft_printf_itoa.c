@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_printf_itoa.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramos <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:52:49 by aramos            #+#    #+#             */
-/*   Updated: 2025/01/12 14:29:38 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/12 15:12:00 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,6 @@ static int	num_len(long n)
 	len = 0;
 	if (n == 0)
 		return (1);
-	if (n < 0)
-	{
-		len++;
-		n = -n;
-	}
 	while (n > 0)
 	{
 		n /= 10;
@@ -32,29 +27,30 @@ static int	num_len(long n)
 	return (len);
 }
 
-char	*ft_itoa(int n)
+char	*ft_printf_itoa(int n)
 {
 	long	num;
 	char	*result;
 	int		len;
 
 	num = (long)n;
+	if (n < 0)
+		num = -num;
 	len = num_len(num);
 	result = (char *) malloc((len + 1) * sizeof(char));
 	if (!result)
 		return (NULL);
 	result[len] = '\0';
-	if (n < 0)
-		num = -num;
-	if (n == 0)
-		result[--len] = '0';
+	if (num == 0)
+	{
+		result[0] = '0';
+		return (result);
+	}
 	while (num > 0)
 	{
 		result[--len] = (num % 10) + '0';
 		num /= 10;
 	}
-	if (n < 0)
-		result[0] = '-';
 	return (result);
 }
 //
@@ -65,6 +61,6 @@ char	*ft_itoa(int n)
 //	int	number;
 //
 //	number = -2147483648;
-//	printf("%s\n", ft_itoa(number));
+//	printf("%s\n", printf_itoa(number));
 //	return (0);
 //}
