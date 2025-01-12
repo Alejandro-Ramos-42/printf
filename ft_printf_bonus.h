@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 09:45:33 by alex              #+#    #+#             */
-/*   Updated: 2025/01/11 12:25:46 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/12 12:49:56 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,16 @@ typedef struct s_format
 }	t_format;
 
 int		ft_printf(const char *str, ...);
+void	bs(const char **str, t_format *format, va_list args, int *printed_chars);
 void	parse_flags(const char **str, t_format *format);
 void	parse_width(const char **str, t_format *format, va_list args);
 void	parse_precision(const char **str, t_format *format, va_list args);
 void	parse_specifier(const char **str, t_format *format);
 void	apply_specifier(t_format *format, va_list args, int *printed_chars);
 void	pbonus_s(const char *str, t_format *format, va_list args, int *printed_chars);
+void	pad_helper(int padding, char c, int *printed_chars);
 void	pbonus_c(char c, t_format *format, int *printed_chars);
 void	pbonus_di(int n, t_format *format, int *printed_chars);
 char	*pbonus_di_helper(t_format *format, int len);
 void	pbonus_u(unsigned int n, t_format *format, int *printed_chars);
 void	print_hx(unsigned int n, t_format *format, int upp, int *printed_chars);
-
-

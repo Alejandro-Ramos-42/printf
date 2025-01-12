@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 20:00:37 by alex              #+#    #+#             */
-/*   Updated: 2025/01/11 12:42:12 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/12 13:00:46 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,23 +37,23 @@ void	pbonus_s(const char *str, t_format *format, va_list args, int *printed_char
 
 	len = ft_strlen(str);
 	padding = 0;
-	if (format -> width > len)//width more than len, pad
+	if (format -> width > len)
 		padding = format -> width - len;
-	if (format -> width == '*' && va_arg(args, int) > len)//arg more than len, pads
+	if (format -> width == '*' && va_arg(args, int) > len)
 		padding = va_arg(args, int) - len;
-	if (format -> precision >= 0 && format -> precision < len)//precision less than len, cuts
+	if (format -> precision >= 0 && format -> precision < len)
 		len = format -> precision;
-	if (format -> width > format -> precision && format -> precision != -1)//width more than precision, pads
+	if (format -> width > format -> precision && format -> precision != -1)
 		padding = format -> width - format -> precision;
-	if (!(format -> flags & FLAG_MINUS))//check if pad is on the left
+	if (!(format -> flags & FLAG_MINUS))
 	{
 		while (padding--) 
 			(*printed_chars) += ft_putchar_fd(' ', 1);
 	}
-	write(1, str, len);//prints with pad if necessary
+	write(1, str, len);
 	*printed_chars += len;
 	if (format -> flags & FLAG_MINUS && format -> f_specifier != 'd'
-			&& format -> f_specifier != 'i')//check if we need to pad to the left
+			&& format -> f_specifier != 'i')
 	{
 		while (padding--)
 			(*printed_chars) += ft_putchar_fd(' ', 1);
@@ -65,63 +65,114 @@ void	pbonus_di(int n, t_format *format, int *printed_chars)
 	char	*str;
 	int		len;
 	int		padding;
-	int		flag;
+
+	str = ft_itoa(n);//-1
+	len = ft_strlen(str);//2
+	padding = 0;
+	if (format -> width > len || format -> precision >= len)
+	{
+		if (n >= 0)
+		{
+			(*printed_chars) += ft_putchar_fd('+', 1);
+		}
+		if (n < 0 && n != -2147483648)
+		{
+			free(str);
+			(*printed_chars) += ft_putchar_fd('-', 1);
+			str = ft_itoa(-n);
+			if (format -> precision >= len)
+				len -= 1;
+		}
+		if (format -> width > len)
+		{
+			padding = format -> width - len;
+			if (format -> flags & FLAG_MINUS && format -> flags & FLAG_ZERO)
+				format -> flags = ~FLAG_ZERO;
+			else if (!(format -> flags & FLAG_MINUS) && !(format -> flags & FLAG_ZERO))
+				pad_helper(padding, ' ', printed_chars);
+		}
+		if (format -> precision > len)
+		{
+			padding = format -> precision - len;
+			format -> flags |= FLAG_ZERO;
+		}
+		if (format -> flags & FLAG_ZERO)
+			pad_helper(padding, '0', printed_chars);
+		(*printed_chars) += ft_putstr_fd(str, 1);
+		if ((format -> flags & FLAG_MINUS && !(format -> flags & FLAG_ZERO)))
+			pad_helper(padding, ' ', printed_chars);
+	}
+	else
+		(*printed_chars) += ft_putstr_fd(str, 1);
+	free(str);
+}
+//
+//char	*prefix(int n, t_format *format)
+//{
+//	if (n < 0)
+//		return ("-");
+//	if (format -> flags & FLAG_PLUS)
+//		return ("+");
+//	if (format -> flags & FLAG_SPACE)
+//		return (" ");
+//	return ("");
+//}
+//
+//int	hm_pading(int len, t_format *format)
+//{
+//	int	padding;
+//
+//	padding = 0;
+//	if (format -> precision > len)
+//		padding = format -> precision - len;
+//	if (format -> width > len + padding)
+//		padding += format -> width - (len + padding);
+//}
+
+void	pad_helper(int padding, char c, int *printed_chars)
+{
+	while (padding--)
+		(*printed_chars) += ft_putchar_fd(c, 1);
+}
+
+void	pbonus_u(unsigned int n, t_format *format, int *printed_chars)
+{
+	char	*str;
+	int		len;
+	int		padding;
 
 	str = ft_itoa(n);
 	len = ft_strlen(str);
 	padding = 0;
-	flag = 0;
 	if (format -> width > len || format -> precision > len)
 	{
 		if (format -> width > len)
+		{
 			padding = format -> width - len;
-		else if (format -> precision > len)
+			if (format -> flags & FLAG_MINUS && format -> flags & FLAG_ZERO)
+				format -> flags = ~FLAG_ZERO;
+			else if (!(format -> flags & FLAG_MINUS) && !(format -> flags & FLAG_ZERO))
+				pad_helper(padding, ' ', printed_chars);
+		}
+		if (format -> precision > len)
 		{
 			padding = format -> precision - len;
-			flag = 1;
+			format -> flags |= FLAG_ZERO;
 		}
-		if (!(format -> flags & FLAG_MINUS))//check if pad is on the left side
-		{
-			if (format -> flags & FLAG_ZERO)//pad with 0s
-				pad_helper(padding, '0', printed_chars, flag);
-			else
-				pad_helper(padding, ' ', printed_chars, flag);
-		}
+		if (format -> flags & FLAG_ZERO)
+			pad_helper(padding, '0', printed_chars);
 		(*printed_chars) += ft_putstr_fd(str, 1);
-		if ((format -> flags & FLAG_MINUS))//check if pad is on the right side
-			pad_helper(padding, ' ', printed_chars, 0);
+		if ((format -> flags & FLAG_MINUS && !(format -> flags & FLAG_ZERO)))
+			pad_helper(padding, ' ', printed_chars);
 	}
 	else
 		(*printed_chars) += ft_putstr_fd(str, 1);
 	free(str);
 }
 
-void	pad_helper(int padding, char c, *printed_chars, int flag)
+void	print_hx(unsigned int n, t_format *format, int upp, int *printed_chars)
 {
-	while (pading--)
-	{
-		(*printed_chars) += ft_putchar_fd(c, 1);
-	}
+	if (format -> flags & FLAG_HASH)
+		(*printed_chars) += ft_putstr_fd("0x", 1);
+	(*printed_chars) += ft_print_hex(n, upp);
 }
-//
-//char	*pbonus_di_helper(t_format *format, int len)
-//{
-//	char	*str;
-//	int		padding;
-//
-//	if (format -> width > len)
-//		padding = format -> width - len;
-//	else if (format -> precision > len)
-//		padding = format -> precision - len;
-//	str = malloc((padding + len + 1) * sizeof(char));
-//	if (!str)
-//		return (NULL);
-//	return (str);
-//}
-//
-//void	pbonus_uformatted(unsigned int n, t_format *format, int *printed_chars)
-//{
-//	char	*str;
-//
-//	str = ft
-//}

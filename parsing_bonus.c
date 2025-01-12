@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 15:20:33 by alex              #+#    #+#             */
-/*   Updated: 2025/01/11 10:41:04 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/12 12:49:58 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	parse_precision(const char **str, t_format *format, va_list args)
 		{
 			format -> precision = va_arg(args, int);
 			(*str)++;
+	//(*str)++;
 		}
 		else
 			format -> precision = 0;
@@ -70,5 +71,4 @@ void	parse_precision(const char **str, t_format *format, va_list args)
 void	parse_specifier(const char **str, t_format *format)
 {
 	format -> f_specifier = **str;
-	//(*str)++;
 }

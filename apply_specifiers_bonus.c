@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 20:41:11 by alex              #+#    #+#             */
-/*   Updated: 2025/01/11 12:25:36 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/12 11:00:55 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	apply_specifier(t_format *format, va_list args, int *printed_chars)
 
 	if (format-> f_specifier == 'c')
 		pbonus_c((char)va_arg(args, int), format, printed_chars);
-//	(*str)++;
 	if (format-> f_specifier == 's')
 	{
 		str = va_arg(args, char *);
@@ -28,12 +27,12 @@ void	apply_specifier(t_format *format, va_list args, int *printed_chars)
 	}
 	else if (format-> f_specifier == 'd' || format-> f_specifier == 'i')
 		pbonus_di(va_arg(args, int), format, printed_chars);
-//	else if (format-> f_specifier == 'u')
-//		print_unsigned_with_format(va_arg(args, unsigned int), format, printed_chars);
-//	else if (format-> f_specifier == 'x')
-//		print_hex_with_format(va_arg(args, unsigned int), format, 0, printed_chars);
-//	else if (format-> f_specifier == 'X')
-//		print_hex_with_format(va_arg(args, unsigned int), format, 1, printed_chars);
+	else if (format-> f_specifier == 'u')
+		pbonus_u(va_arg(args, unsigned int), format, printed_chars);
+	else if (format-> f_specifier == 'x')
+		print_hx(va_arg(args, unsigned int), format, 0, printed_chars);
+	else if (format-> f_specifier == 'X')
+		print_hx(va_arg(args, unsigned int), format, 1, printed_chars);
 	else if (format-> f_specifier == '%')
 		*printed_chars += ft_putchar_fd('%', 1);
 }
