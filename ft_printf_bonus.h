@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 09:45:33 by alex              #+#    #+#             */
-/*   Updated: 2025/01/12 13:16:19 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/13 18:53:38 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ void	parse_precision(const char **str, t_format *format, va_list args);
 void	parse_specifier(const char **str, t_format *format);
 void	apply_specifier(t_format *format, va_list args, int *printed_chars);
 void	pbonus_s(const char *str, t_format *format, va_list args, int *printed_chars);
-void	pad_helper(int padding, char c, int *printed_chars);
+void	pad_helper(int padding, int *printed_chars, int *m);
 void	pbonus_c(char c, t_format *format, int *printed_chars);
 void	pbonus_di(int n, t_format *format, int *printed_chars);
 char	*prefix(int n, t_format *format);
-int		hm_padding(int len, t_format *format);
+int		hm_padding(int n, int len, t_format *format, int *m, int *printed_chars);
 char	*pbonus_di_helper(t_format *format, int len);
 void	pbonus_u(unsigned int n, t_format *format, int *printed_chars);
 void	print_hx(unsigned int n, t_format *format, int upp, int *printed_chars);
