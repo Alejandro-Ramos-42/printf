@@ -24,7 +24,9 @@ SRC = \
 	ft_strdup.c\
 	ft_substr.c\
 	ft_itoa.c\
+	ft_hxtoa.c\
 	ft_printf_itoa.c\
+	ft_printf_utoa.c\
 	ft_strjoin.c\
 	ft_strtrim.c\
 	ft_split.c\

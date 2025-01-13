@@ -6,12 +6,13 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 20:00:37 by alex              #+#    #+#             */
-/*   Updated: 2025/01/13 20:17:45 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/13 23:37:23 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
+//%c speficier
 void	pbonus_c(char c, t_format *format, int *printed_chars)
 {
 	int		padding;
@@ -30,6 +31,7 @@ void	pbonus_c(char c, t_format *format, int *printed_chars)
 	}
 }
 
+//%s specifier
 void	pbonus_s(const char *str, t_format *format, va_list args, int *printed_chars)
 {
 	int	len;
@@ -59,7 +61,7 @@ void	pbonus_s(const char *str, t_format *format, va_list args, int *printed_char
 			(*printed_chars) += ft_putchar_fd(' ', 1);
 	}
 }
-//
+//%d and %i specifiers
 //void	pbonus_di(int n, t_format *format, int *printed_chars)
 //{
 //	char	*str;
@@ -89,7 +91,7 @@ void	pbonus_s(const char *str, t_format *format, va_list args, int *printed_char
 //
 char	*prefix(int n, t_format *format)
 {
-	if (n < 0)//yes
+	if (n < 0)
 		return ("-");
 	if (format -> flags & FLAG_PLUS)
 		return ("+");
@@ -103,21 +105,21 @@ int	hm_padding(int n, int len, t_format *format, int *m, int *printed_chars)
 	int	padding;
 
 	padding = 0;
-	if (n < 0 && !(format -> flags & FLAG_ZERO))//yes, prints '-'
+	if (n < 0 && !(format -> flags & FLAG_ZERO))
 	{
 		(*printed_chars) += ft_putstr_fd(prefix(n, format), 1);
-		len++;//len 2
+		len++;
 	}
-	if (format -> precision > len)//no
+	if (format -> precision > len)
 	{
 		padding = format -> precision - len;
 		*m = 1;
 	}
-	if (format -> width > len)//no
+	if (format -> width > len)
 	{
-		padding = format -> width - len;//
-		if (format -> flags & FLAG_ZERO)//no
-			*m = 1;//m = 0
+		padding = format -> width - len;
+		if (format -> flags & FLAG_ZERO)
+			*m = 1;
 	}
 	return (padding);
 }
@@ -129,173 +131,103 @@ void	pad_helper(int padding, int *printed_chars, int *m)
 		while (padding--)
 			(*printed_chars) += ft_putchar_fd(' ', 1);
 	}
-	else if (*m == 1)//yes
+	else if (*m == 1)
 	{
 		while (padding--)
-			(*printed_chars) += ft_putchar_fd('0', 1);//prints 00
+			(*printed_chars) += ft_putchar_fd('0', 1);
 	}
 }
 
+//%u specifier
 void	pbonus_u(unsigned int n, t_format *format, int *printed_chars)
 {
 	char	*str;
 	int		len;
-	int		padding;
 	int		m;
 
-	str = ft_printf_itoa(n);
+	str = ft_printf_utoa(n);
 	m = 0;
-	if (format -> flags & FLAG_PLUS && !(format -> flags & FLAG_ZERO))
+	len = ft_strlen(str);//10
+	if ((format -> flags & FLAG_ZERO))//no
 	{
-		free(str);
-		str = ft_strjoin("+", ft_printf_itoa(n));
-	}
-	len = ft_strlen(str);
-	if ((format -> flags & FLAG_ZERO))
-	{
-		if (format -> flags & FLAG_PLUS)
-		{
-			(*printed_chars) += ft_putstr_fd("+", 1);
-			len += 1;
-		}
 		if (format -> flags & FLAG_MINUS)
 			format -> flags = ~FLAG_ZERO;
 	}
-	padding = hm_padding(n, len, format, &m, printed_chars);
-	pad_helper(padding, printed_chars, &m);
+	if (!(format -> flags & FLAG_MINUS))
+		hm_pudding(len, format, printed_chars);
 	(*printed_chars) += ft_putstr_fd(str, 1);
-	pad_helper(padding, printed_chars, &m);
+	if (format -> flags & FLAG_MINUS)
+		hm_pudding(len, format, printed_chars);
 	free(str);
 }
-//void	pbonus_di(int n, t_format *format, int *printed_chars)
-//{
-//	char	*str;
-//	int		len;
-//	int		padding;
-//
-//	str = ft_itoa(n);//14
-//	len = ft_strlen(str);//2
-//	padding = 0;
-//	if (format -> width > len || format -> precision >= len)//yes
-//	{
-//		if (n >= 0 && (format -> flags & FLAG_PLUS) && (format -> flags & FLAG_ZERO))//no
-//			(*printed_chars) += ft_putstr_fd(prefix(n, format), 1);
-//		if (n < 0 && (format -> flags & FLAG_ZERO))//no
-//			(*printed_chars) += ft_putstr_fd(prefix(n, format), 1);
-//		padding = hm_padding(len, format);//1
-//		if (!(format -> flags & FLAG_MINUS))
-//			pad_helper(padding, ' ', printed_chars);//prints ' '
-//		(*printed_chars) += ft_putstr_fd(str, 1);//prints '14'
-//		if ((format -> flags & FLAG_MINUS && !(format -> flags & FLAG_ZERO)))
-//			pad_helper(padding, ' ', printed_chars);
-//	}
-//	else
-//		(*printed_chars) += ft_putstr_fd(str, 1);
-//	free(str);
-//}
-//
-//
-//void	pbonus_di(int n, t_format *format, int *printed_chars)
-//{
-//	char	*str;
-//	int		len;
-//	int		padding;
-//	char	*print_prefix;
-//	int		total_width;
-//
-//	str = ft_printf_itoa(n);//1
-//	len = ft_strlen(str);//1
-//	print_prefix = prefix(n, format);//-
-//	total_width = len + ft_strlen(print_prefix);//2
-//	padding = hm_padding(total_width, format);//0
-//	if (!(format -> flags & FLAG_MINUS))//yes
-//	{
-//		if (n < 0 || format -> flags & FLAG_PLUS)//yes
-//		{
-//			if (format -> flags & FLAG_ZERO)//no
-//			{
-//				(*printed_chars) += ft_putstr_fd(print_prefix, 1);
-//				pad_helper(padding, '0', printed_chars);
-//			}
-//			else//yes
-//			{
-//				pad_helper(padding, ' ', printed_chars);//prints nothing
-//				(*printed_chars) += ft_putstr_fd(print_prefix, 1);//prints -
-//			}
-//		}
-//	}
-//	(*printed_chars) += ft_putstr_fd(str, 1);//prints 1
-//	if (format -> flags & FLAG_MINUS)
-//		pad_helper(padding, ' ', printed_chars);
-//	free(str);
-//}
 
-//void	pbonus_di(int n, t_format *format, int *printed_chars)
-//{
-//	char	*str;
-//	int		len;
-//	int		padding;
-//	char	*print_prefix;
-//	int		total_width;
-//
-//	str = ft_printf_itoa(n);//14
-//	len = ft_strlen(str);//2
-//	print_prefix = prefix(n, format);//'-'
-//	total_width = len + ft_strlen(print_prefix);//2+1 = 3
-//	padding = hm_padding(total_width, format);// 1
-//	if (!(format -> flags & FLAG_MINUS))//no
-//	{
-//		if (format -> flags & FLAG_ZERO && format -> precision < 0)
-//			pad_helper(padding, '0', printed_chars);
-//		else// if (!(format -> flags & FLAG_ZERO))
-//			pad_helper(padding, ' ', printed_chars);
-//	}
-//	(*printed_chars) += ft_putstr_fd(print_prefix, 1);
-//	(*printed_chars) += ft_putstr_fd(str, 1);
-//	if (format -> flags & FLAG_MINUS)
-//		pad_helper(padding, ' ', printed_chars);
-//	free(str);
-//}
-//
+void	hm_pudding(int len, t_format *format, int *printed_chars)
+{
+	int		padding;
+	char	c;
 
-//void	pbonus_u(unsigned int n, t_format *format, int *printed_chars)
-//{
-//	char	*str;
-//	int		len;
-//	int		padding;
-//
-//	str = ft_itoa(n);
-//	len = ft_strlen(str);
-//	padding = 0;
-//	if (format -> width > len || format -> precision > len)
-//	{
-//		if (format -> width > len)
-//		{
-//			padding = format -> width - len;
-//			if (format -> flags & FLAG_MINUS && format -> flags & FLAG_ZERO)
-//				format -> flags = ~FLAG_ZERO;
-//			else if (!(format -> flags & FLAG_MINUS) && !(format -> flags & FLAG_ZERO))
-//				pad_helper(padding, ' ', printed_chars);
-//		}
-//		if (format -> precision > len)
-//		{
-//			padding = format -> precision - len;
-//			format -> flags |= FLAG_ZERO;
-//		}
-//		if (format -> flags & FLAG_ZERO)
-//			pad_helper(padding, '0', printed_chars);
-//		(*printed_chars) += ft_putstr_fd(str, 1);
-//		if ((format -> flags & FLAG_MINUS && !(format -> flags & FLAG_ZERO)))
-//			pad_helper(padding, ' ', printed_chars);
-//	}
-//	else
-//		(*printed_chars) += ft_putstr_fd(str, 1);
-//	free(str);
-//}
+	padding = 0;
+	if (format -> width > len)
+		padding = format -> width - len;
+	if (format -> flags & FLAG_ZERO)
+		c = '0';
+	else
+		c = ' ';
+	if (format -> precision > len)
+	{
+		padding = format -> precision - len;
+		c = '0';
+	}
+	while (padding--)
+		(*printed_chars) += ft_putchar_fd(c, 1);
+}
 
+//%x specifier
 void	print_hx(unsigned int n, t_format *format, int upp, int *printed_chars)
 {
-	if (format -> flags & FLAG_HASH)
-		(*printed_chars) += ft_putstr_fd("0x", 1);
+	int		len;
+	char	*str;
+
+	str = ft_hxtoa(n);//1
+	len = ft_strlen(str);//1
+	if ((format -> flags & FLAG_ZERO))///no
+	{
+		if (format -> flags & FLAG_MINUS)
+			format -> flags = ~FLAG_ZERO;
+	}
+	if (format -> flags & FLAG_HASH)//no
+	{
+		if (upp == 0)
+			(*printed_chars) += ft_putstr_fd("0x", 1);
+		if (upp == 1)
+			(*printed_chars) += ft_putstr_fd("0X", 1);
+		len += 2;
+	}
+	if (!(format -> flags & FLAG_MINUS))
+		hx_padding(len, format, printed_chars);//
 	(*printed_chars) += ft_print_hex(n, upp);
+	if (format -> flags & FLAG_MINUS)
+		hx_padding(len, format, printed_chars);//
+	free(str);
+}
+
+void	hx_padding(int len, t_format *format, int *printed_chars)
+{
+	int		padding;
+	char	c;
+
+	padding = 0;
+	if (format -> width > len)//yes
+		padding = format -> width - len;//pad = 3-1 = 2
+	if (format -> flags & FLAG_ZERO)//no
+		c = '0';
+	else
+		c = ' ';//pad with ' '
+	if (format -> precision > len)//no
+	{
+		padding = format -> precision - len;
+		c = '0';
+	}
+	while (padding--)
+		(*printed_chars) += ft_putchar_fd(c, 1);
 }

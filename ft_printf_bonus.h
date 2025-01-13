@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 09:45:33 by alex              #+#    #+#             */
-/*   Updated: 2025/01/13 18:53:38 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/13 22:54:36 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,6 @@ char	*prefix(int n, t_format *format);
 int		hm_padding(int n, int len, t_format *format, int *m, int *printed_chars);
 char	*pbonus_di_helper(t_format *format, int len);
 void	pbonus_u(unsigned int n, t_format *format, int *printed_chars);
+void	hm_pudding(int len, t_format *format, int *printed_chars);
 void	print_hx(unsigned int n, t_format *format, int upp, int *printed_chars);
+void		hx_padding(int len, t_format *format, int *printed_chars);
