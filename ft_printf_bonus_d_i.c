@@ -6,15 +6,15 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 20:00:37 by alex              #+#    #+#             */
-/*   Updated: 2025/01/14 13:21:49 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/14 15:18:48 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-static int	pd(int n, int len, int *m, t_format *format, int *printed_chars);
+static int	pd(int n, int len, t_format *format, int *printed_chars);
 static int	pbonus_di_0(int n, t_format *format, int *printed_chars, int *len);
-static void	pad_helper(int padding, int *printed_chars, int *m);
+static void	pad_helper(int padding, int *printed_chars, t_format *format);
 static char	*prefix(int n, t_format *format);
 
 //%d and %i specifiers
@@ -23,25 +23,23 @@ void	pbonus_di(int n, t_format *format, int *printed_chars)
 	char	*str;
 	int		len;
 	int		padding;
-	int		m;
 
 	str = ft_printf_itoa(n);
-	m = 0;
 	len = ft_strlen(str);
 	if (format -> flags & FLAG_ZERO)
-		m = pbonus_di_0(n, format, printed_chars, &len);
-	padding = pd(n, len, &m, format, printed_chars);
+		format -> m = pbonus_di_0(n, format, printed_chars, &len);
+	padding = pd(n, len, format, printed_chars);
 	if (n >= 0 && (format -> flags & FLAG_PLUS || format -> flags & FLAG_SPACE))
 	{
 		(*printed_chars) += ft_putstr_fd(prefix(n, format), 1);
 		len++;
 	}
 	if (!(format -> flags & FLAG_MINUS))
-		pad_helper(padding, printed_chars, &m);
+		pad_helper(padding, printed_chars, format);
 	(*printed_chars) += ft_putstr_fd(str, 1);
-	m = 0;
+	format -> m = 0;
 	if (format -> flags & FLAG_MINUS)
-		pad_helper(padding, printed_chars, &m);
+		pad_helper(padding, printed_chars, format);
 	free(str);
 }
 
@@ -77,7 +75,7 @@ static char	*prefix(int n, t_format *format)
 	return ("");
 }
 
-static int	pd(int n, int len, int *m, t_format *format, int *printed_chars)
+static int	pd(int n, int len, t_format *format, int *printed_chars)
 {
 	int	padding;
 
@@ -87,7 +85,7 @@ static int	pd(int n, int len, int *m, t_format *format, int *printed_chars)
 		if (n < 0 && !(format -> flags & FLAG_ZERO))
 			(*printed_chars) += ft_putstr_fd(prefix(n, format), 1);
 		padding = format -> precision - len;
-		*m = 1;
+		format -> m = 1;
 	}
 	else if (n < 0 && !(format -> flags & FLAG_ZERO))
 	{
@@ -98,19 +96,19 @@ static int	pd(int n, int len, int *m, t_format *format, int *printed_chars)
 	{
 		padding = format -> width - len;
 		if (format -> flags & FLAG_ZERO)
-			*m = 1;
+			format -> m = 1;
 	}
 	return (padding);
 }
 
-static void	pad_helper(int padding, int *printed_chars, int *m)
+static void	pad_helper(int padding, int *printed_chars, t_format *format)
 {
-	if (*m == 0)
+	if (format -> m == 0)
 	{
 		while (padding--)
 			(*printed_chars) += ft_putchar_fd(' ', 1);
 	}
-	else if (*m == 1)
+	else if (format -> m == 1)
 	{
 		while (padding--)
 			(*printed_chars) += ft_putchar_fd('0', 1);
