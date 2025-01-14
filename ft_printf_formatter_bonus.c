@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 20:00:37 by alex              #+#    #+#             */
-/*   Updated: 2025/01/13 23:37:23 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/14 04:22:36 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,7 +195,7 @@ void	print_hx(unsigned int n, t_format *format, int upp, int *printed_chars)
 		if (format -> flags & FLAG_MINUS)
 			format -> flags = ~FLAG_ZERO;
 	}
-	if (format -> flags & FLAG_HASH)//no
+	if (format -> flags & FLAG_HASH && n != 0)//no
 	{
 		if (upp == 0)
 			(*printed_chars) += ft_putstr_fd("0x", 1);
