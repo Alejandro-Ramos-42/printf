@@ -20,7 +20,9 @@ OBJ = $(SRC:.c=.o)
 BSRC = ./ft_printf_bonus.c\
 	   ./parsing_bonus.c\
 	   ./apply_specifiers_bonus.c\
-	   ./ft_printf_formatter_bonus.c
+	   ./ft_printf_bonus_c_s_u.c\
+	   ./ft_printf_bonus_x_p.c\
+	   ./ft_printf_bonus_d_i.c
 
 BOBJ = $(BSRC:.c=.o)
 
