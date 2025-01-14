@@ -38,20 +38,17 @@ SRC = \
 	ft_putnbr_fd.c\
 	ft_putunbr_fd.c\
 	ft_print_memory.c\
-	ft_print_hex_low.c
-
-BSRC = ft_lstnew.c\
-		ft_lstadd_front.c\
-		ft_lstsize.c\
-		ft_lstlast.c\
-		ft_lstadd_back.c\
-		ft_lstdelone.c\
-		ft_lstclear.c\
-		ft_lstiter.c\
-		ft_lstmap.c
+	ft_lstnew.c\
+	ft_lstadd_front.c\
+	ft_lstsize.c\
+	ft_lstlast.c\
+	ft_lstadd_back.c\
+	ft_lstdelone.c\
+	ft_lstclear.c\
+	ft_lstiter.c\
+	ft_lstmap.c
 
 OBJ = $(SRC:.c=.o)
-BOBJ = $(BSRC:.c=.o)
 CC = cc
 CFLAGS = -Wall -Werror -Wextra -fPIC
 NAME = libft.a
@@ -62,13 +59,10 @@ $(NAME): $(OBJ)
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-bonus: $(NAME) $(BOBJ)
-	ar rcs $(NAME) $(BOBJ)
-
 all: $(NAME)
 
 clean:
-	rm -f $(OBJ) $(BOBJ)
+	rm -f $(OBJ)
 
 fclean: clean
 	rm -f $(NAME)

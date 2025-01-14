@@ -6,33 +6,38 @@
 /*   By: aramos <alex.qsc2@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 08:42:10 by aramos            #+#    #+#             */
-/*   Updated: 2025/01/13 23:29:32 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/14 00:27:23 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_hxtoa(int n)
+int	get_len(int num)
 {
-	unsigned int	num_in_dec;
-	unsigned int	temp;
+	int	len;
+
+	len = 0;
+	while (num > 0)
+	{
+		num /= 16;
+		len++;
+	}
+	return (len);
+}
+
+char	*ft_hxtoa(int n, int upp)
+{
+	unsigned int	num;
 	char			*num_in_hex;
 	char			*lookup_array;
 	int				len;
 
-	num_in_dec = (unsigned int)n;
-	temp = num_in_dec;
+	num = (unsigned int)n;
 	len = 0;
 	if (n == 0)
 		len = 1;
 	else
-	{
-		while (temp > 0)
-		{
-			temp /= 16;
-			len++;
-		}
-	}
+		len = get_len(num);
 	num_in_hex = malloc((len + 1) * sizeof (char));
 	if (!num_in_hex)
 		return (NULL);
@@ -41,7 +46,15 @@ char	*ft_hxtoa(int n)
 	while (len > 0)
 	{
 		num_in_hex[--len] = lookup_array[num_in_dec % 16];
-		num_in_dec /= 16;
+		num /= 16;
 	}
+	if (upp == 1)
+		x_to_alpha(num_in_hex);
 	return (num_in_hex);
+}
+
+void	x_to_alpha(*c)
+{
+	if (c && *c)
+		*c = (char)ft_toupper(*c);
 }

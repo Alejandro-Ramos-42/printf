@@ -6,7 +6,7 @@
 /*   By: aramos <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:52:49 by aramos            #+#    #+#             */
-/*   Updated: 2025/01/13 21:44:50 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/14 00:18:21 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static int	num_len(unsigned int n)
 char	*ft_printf_utoa(unsigned int n)
 {
 	unsigned int	num;
-	char		*result;
-	int			len;
+	char			*result;
+	int				len;
 
 	num = (long)n;
 	if (n < 0)
