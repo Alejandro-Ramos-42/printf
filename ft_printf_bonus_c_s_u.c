@@ -6,13 +6,14 @@
 /*   By: aramos <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 06:13:54 by aramos            #+#    #+#             */
-/*   Updated: 2025/01/14 07:19:07 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/14 13:19:20 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
 static void	hm_pudding(int len, t_format *format, int *printed_chars);
+static void	pbonus_s_pad(int padding, int *printed_chars);
 
 //%c speficier
 void	pbonus_c(char c, t_format *format, int *printed_chars)
@@ -51,18 +52,18 @@ void	pbonus_s(const char *str, t_format *format
 	if (format -> width > format -> precision && format -> precision != -1)
 		padding = format -> width - format -> precision;
 	if (!(format -> flags & FLAG_MINUS))
-	{
-		while (padding--)
-			(*printed_chars) += ft_putchar_fd(' ', 1);
-	}
+		pbonus_s_pad(padding, printed_chars);
 	write(1, str, len);
 	*printed_chars += len;
 	if (format -> flags & FLAG_MINUS
 		&& format -> f_specifier != 'd' && format -> f_specifier != 'i')
-	{
-		while (padding--)
-			(*printed_chars) += ft_putchar_fd(' ', 1);
-	}
+		pbonus_s_pad(padding, printed_chars);
+}
+
+static void	pbonus_s_pad(int padding, int *printed_chars)
+{
+	while (padding--)
+		(*printed_chars) += ft_putchar_fd(' ', 1);
 }
 
 //%u specifier

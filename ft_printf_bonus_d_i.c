@@ -6,13 +6,13 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 20:00:37 by alex              #+#    #+#             */
-/*   Updated: 2025/01/14 08:35:26 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/14 13:21:49 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-static int	hm_padding(int n, int len, t_format *format, int *m, int *printed_chars);
+static int	pd(int n, int len, int *m, t_format *format, int *printed_chars);
 static int	pbonus_di_0(int n, t_format *format, int *printed_chars, int *len);
 static void	pad_helper(int padding, int *printed_chars, int *m);
 static char	*prefix(int n, t_format *format);
@@ -25,12 +25,12 @@ void	pbonus_di(int n, t_format *format, int *printed_chars)
 	int		padding;
 	int		m;
 
-	str = ft_printf_itoa(n);//1
+	str = ft_printf_itoa(n);
 	m = 0;
-	len = ft_strlen(str);//1
-	if (format -> flags & FLAG_ZERO)//no
+	len = ft_strlen(str);
+	if (format -> flags & FLAG_ZERO)
 		m = pbonus_di_0(n, format, printed_chars, &len);
-	padding = hm_padding(n, len, format, &m, printed_chars);//
+	padding = pd(n, len, &m, format, printed_chars);
 	if (n >= 0 && (format -> flags & FLAG_PLUS || format -> flags & FLAG_SPACE))
 	{
 		(*printed_chars) += ft_putstr_fd(prefix(n, format), 1);
@@ -52,7 +52,7 @@ static int	pbonus_di_0(int n, t_format *format, int *printed_chars, int *len)
 	m = 0;
 	if (!(format -> flags & FLAG_MINUS))
 	{
-		if (n < 0 || format -> flags & FLAG_PLUS || format -> flags & FLAG_SPACE)
+		if (n < 0 || format->flags & FLAG_PLUS || format->flags & FLAG_SPACE)
 		{
 			(*printed_chars) += ft_putstr_fd(prefix(n, format), 1);
 			(*len)++;
@@ -77,7 +77,7 @@ static char	*prefix(int n, t_format *format)
 	return ("");
 }
 
-static int	hm_padding(int n, int len, t_format *format, int *m, int *printed_chars)
+static int	pd(int n, int len, int *m, t_format *format, int *printed_chars)
 {
 	int	padding;
 
