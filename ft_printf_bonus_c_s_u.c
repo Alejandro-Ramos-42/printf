@@ -6,7 +6,7 @@
 /*   By: aramos <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 06:13:54 by aramos            #+#    #+#             */
-/*   Updated: 2025/01/14 06:41:54 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/14 07:19:07 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	pbonus_c(char c, t_format *format, int *printed_chars)
 }
 
 //%s specifier
-void	pbonus_s(const char *str, t_format *format, va_list args, int *printed_chars)
+void	pbonus_s(const char *str, t_format *format
+		, va_list args, int *printed_chars)
 {
 	int	len;
 	int	padding;
@@ -51,13 +52,13 @@ void	pbonus_s(const char *str, t_format *format, va_list args, int *printed_char
 		padding = format -> width - format -> precision;
 	if (!(format -> flags & FLAG_MINUS))
 	{
-		while (padding--) 
+		while (padding--)
 			(*printed_chars) += ft_putchar_fd(' ', 1);
 	}
 	write(1, str, len);
 	*printed_chars += len;
-	if (format -> flags & FLAG_MINUS && format -> f_specifier != 'd'
-			&& format -> f_specifier != 'i')
+	if (format -> flags & FLAG_MINUS
+		&& format -> f_specifier != 'd' && format -> f_specifier != 'i')
 	{
 		while (padding--)
 			(*printed_chars) += ft_putchar_fd(' ', 1);
@@ -73,8 +74,8 @@ void	pbonus_u(unsigned int n, t_format *format, int *printed_chars)
 
 	str = ft_printf_utoa(n);
 	m = 0;
-	len = ft_strlen(str);//10
-	if ((format -> flags & FLAG_ZERO))//no
+	len = ft_strlen(str);
+	if (format -> flags & FLAG_ZERO)
 	{
 		if (format -> flags & FLAG_MINUS)
 			format -> flags = ~FLAG_ZERO;
