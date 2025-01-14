@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 20:41:11 by alex              #+#    #+#             */
-/*   Updated: 2025/01/14 02:00:57 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/14 04:40:59 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	apply_specifier(t_format *format, va_list args, int *printed_chars)
 			str = "(null)";
 		pbonus_s(str, format, args, printed_chars);
 	}
-	//else if (format-> f_specifier == 'd' || format-> f_specifier == 'i')
-	//	pbonus_di(va_arg(args, int), format, printed_chars);
+	else if (format-> f_specifier == 'd' || format-> f_specifier == 'i')
+		pbonus_di(va_arg(args, int), format, printed_chars);
 	else if (format-> f_specifier == 'u')
 	{
 		number = (unsigned int) va_arg(args, int);
@@ -36,17 +36,17 @@ void	apply_specifier(t_format *format, va_list args, int *printed_chars)
 	else if (format-> f_specifier == 'x')
 	{
 		number = (unsigned )va_arg(args, int);
-		if ( number == 0)
-			*(printed_chars) += ft_putchar_fd('0', 1);
-		else
+	//	if ( number == 0)
+	//		*(printed_chars) += ft_putchar_fd('0', 1);
+	//	else
 			print_hx(number, format, 0, printed_chars);
 	}
 	else if (format-> f_specifier == 'X')
 	{
-		number = va_arg(args, int);
-		if ( number == 0)
-			*(printed_chars) += ft_putchar_fd('0', 1);
-		else
+		number = (unsigned) va_arg(args, int);
+	//	if ( number == 0)
+	//		*(printed_chars) += ft_putchar_fd('0', 1);
+	//	else
 			print_hx(number, format, 1, printed_chars);
 	}
 	else if (format-> f_specifier == '%')

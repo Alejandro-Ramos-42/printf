@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 20:00:37 by alex              #+#    #+#             */
-/*   Updated: 2025/01/14 04:32:45 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/14 04:54:47 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,34 +61,35 @@ void	pbonus_s(const char *str, t_format *format, va_list args, int *printed_char
 			(*printed_chars) += ft_putchar_fd(' ', 1);
 	}
 }
+
 //%d and %i specifiers
-//void	pbonus_di(int n, t_format *format, int *printed_chars)
-//{
-//	char	*str;
-//	int		len;
-//	int		padding;
-//	int		m;
-//
-//	str = ft_printf_itoa(n);//9
-//	m = 0;
-//	if ((format -> flags & FLAG_PLUS))//no
-//		str = ft_strjoin(prefix(n, format), str);
-//	len = ft_strlen(str);//1
-//	if (n < 0 && format -> flags & FLAG_ZERO && !(format -> flags & FLAG_MINUS))//yes
-//	{
-//		(*printed_chars) += ft_putstr_fd(prefix(n, format), 1);
-//		len++;
-//	}
-//	padding = hm_padding(n, len, format, &m, printed_chars);
-//	if (!(format -> flags & FLAG_MINUS))//no
-//		pad_helper(padding, printed_chars, &m);
-//	(*printed_chars) += ft_putstr_fd(str, 1);//prints 1
-//	m = 0;
-//	if (format -> flags & FLAG_MINUS)//yes
-//		pad_helper(padding, printed_chars, &m);//prints 0 pads
-//	free(str);
-//}
-//
+void	pbonus_di(int n, t_format *format, int *printed_chars)
+{
+	char	*str;
+	int		len;
+	int		padding;
+	int		m;
+
+	str = ft_printf_itoa(n);
+	m = 0;
+	if ((format -> flags & FLAG_PLUS))
+		str = ft_strjoin(prefix(n, format), str);
+	len = ft_strlen(str);
+	if (n < 0 && format -> flags & FLAG_ZERO && !(format -> flags & FLAG_MINUS))
+	{
+		(*printed_chars) += ft_putstr_fd(prefix(n, format), 1);
+		len++;
+	}
+	padding = hm_padding(n, len, format, &m, printed_chars);
+	if (!(format -> flags & FLAG_MINUS))
+		pad_helper(padding, printed_chars, &m);
+	(*printed_chars) += ft_putstr_fd(str, 1);
+	m = 0;
+	if (format -> flags & FLAG_MINUS)
+		pad_helper(padding, printed_chars, &m);
+	free(str);
+}
+
 char	*prefix(int n, t_format *format)
 {
 	if (n < 0)
