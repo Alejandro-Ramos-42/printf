@@ -6,7 +6,7 @@
 /*   By: aramos <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 17:29:26 by aramos            #+#    #+#             */
-/*   Updated: 2025/01/14 02:46:58 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/14 11:38:17 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ int		ft_putnbr_fd(int n, int fd);
 int		ft_putunbr_fd(unsigned int n, int fd);
 int		ft_print_memory(void *addr);
 int		ft_print_hex(unsigned long number, int upp);
+int		ft_print_hex_normal(unsigned long number, int upp);
+int		ft_print_hex_normal_x(unsigned long number, int upp);
 
 //Lists
 t_list	*ft_lstnew(void *content);
