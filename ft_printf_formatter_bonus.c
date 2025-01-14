@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 20:00:37 by alex              #+#    #+#             */
-/*   Updated: 2025/01/14 00:07:54 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/14 01:44:35 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,7 @@ void	print_hx(unsigned int n, t_format *format, int upp, int *printed_chars)
 	int		len;
 	char	*str;
 
-	str = ft_hxtoa(n);//1
+	str = ft_hxtoa(n, upp);//1
 	len = ft_strlen(str);//1
 	if ((format -> flags & FLAG_ZERO))///no
 	{
@@ -230,10 +230,4 @@ void	hx_padding(int len, t_format *format, int *printed_chars)
 	}
 	while (padding--)
 		(*printed_chars) += ft_putchar_fd(c, 1);
-}
-
-void	ft_x_to_X(char *c)
-{
-	if (c && *c)
-		*c = (char)ft_toupper(*c);
 }

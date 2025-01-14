@@ -6,13 +6,15 @@
 /*   By: aramos <alex.qsc2@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 08:42:10 by aramos            #+#    #+#             */
-/*   Updated: 2025/01/14 00:27:23 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/14 01:33:53 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	get_len(int num)
+static void	x_to_alpha(char *c);
+
+int	get_len(unsigned int num)
 {
 	int	len;
 
@@ -45,7 +47,7 @@ char	*ft_hxtoa(int n, int upp)
 	num_in_hex[len] = '\0';
 	while (len > 0)
 	{
-		num_in_hex[--len] = lookup_array[num_in_dec % 16];
+		num_in_hex[--len] = lookup_array[num % 16];
 		num /= 16;
 	}
 	if (upp == 1)
@@ -53,8 +55,22 @@ char	*ft_hxtoa(int n, int upp)
 	return (num_in_hex);
 }
 
-void	x_to_alpha(*c)
+static void	x_to_alpha(char *c)
 {
-	if (c && *c)
+	while (*c)
+	{
 		*c = (char)ft_toupper(*c);
+		c++;
+	}
+}
+
+int	ft_print_hex(int number, int upp)
+{
+	char			*num_hex;
+	int				chars_printed;
+
+	num_hex = ft_hxtoa(number, upp);
+	chars_printed = ft_putstr_fd(num_hex, 1);
+	free(num_hex);
+	return (chars_printed);
 }
