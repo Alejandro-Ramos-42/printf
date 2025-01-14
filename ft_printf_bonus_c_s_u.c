@@ -6,11 +6,13 @@
 /*   By: aramos <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 06:13:54 by aramos            #+#    #+#             */
-/*   Updated: 2025/01/14 06:37:12 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/14 06:41:54 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
+
+static void	hm_pudding(int len, t_format *format, int *printed_chars);
 
 //%c speficier
 void	pbonus_c(char c, t_format *format, int *printed_chars)
