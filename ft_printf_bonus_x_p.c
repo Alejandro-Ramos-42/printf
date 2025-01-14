@@ -6,7 +6,7 @@
 /*   By: aramos <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 06:18:20 by aramos            #+#    #+#             */
-/*   Updated: 2025/01/14 11:44:38 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/14 12:01:18 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,12 @@ void	pbonus_p(void *address, t_format *format, int *printed_chars)
 	int				len;
 
 	if (address == 0)
+	{
 		(*printed_chars) += ft_putstr_fd("(nil)", 1);
+		return ;
+	}
 	number = (unsigned long)address;
 	hex = ft_hxtoa(number, 0);
-	if (address == 0)
-		(*printed_chars) += ft_putstr_fd("(nil)", 1);
 	str = ft_strjoin("0x", hex);
 	len = ft_strlen(str);
 	if (!(format -> flags & FLAG_MINUS))
