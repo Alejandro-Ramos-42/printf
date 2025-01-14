@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 09:45:33 by alex              #+#    #+#             */
-/*   Updated: 2025/01/13 22:54:36 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/14 05:44:31 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,15 @@ void	parse_width(const char **str, t_format *format, va_list args);
 void	parse_precision(const char **str, t_format *format, va_list args);
 void	parse_specifier(const char **str, t_format *format);
 void	apply_specifier(t_format *format, va_list args, int *printed_chars);
+void	pbonus_c(char c, t_format *format, int *printed_chars);
 void	pbonus_s(const char *str, t_format *format, va_list args, int *printed_chars);
 void	pad_helper(int padding, int *printed_chars, int *m);
-void	pbonus_c(char c, t_format *format, int *printed_chars);
 void	pbonus_di(int n, t_format *format, int *printed_chars);
 char	*prefix(int n, t_format *format);
 int		hm_padding(int n, int len, t_format *format, int *m, int *printed_chars);
-char	*pbonus_di_helper(t_format *format, int len);
 void	pbonus_u(unsigned int n, t_format *format, int *printed_chars);
 void	hm_pudding(int len, t_format *format, int *printed_chars);
 void	print_hx(unsigned int n, t_format *format, int upp, int *printed_chars);
-void		hx_padding(int len, t_format *format, int *printed_chars);
+void	hx_padding(int len, t_format *format, int *printed_chars);
+void	pbonus_p(void *address, t_format *format, int *printed_chars);
+void	p_padding(int len, t_format *format, int *printed_chars);

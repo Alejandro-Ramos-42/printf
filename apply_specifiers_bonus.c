@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 20:41:11 by alex              #+#    #+#             */
-/*   Updated: 2025/01/14 04:40:59 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/14 05:22:17 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,6 @@ void	apply_specifier(t_format *format, va_list args, int *printed_chars)
 	}
 	else if (format-> f_specifier == '%')
 		*printed_chars += ft_putchar_fd('%', 1);
+	else if (format -> f_specifier == 'p')
+		pbonus_p(va_arg(args, int *), format, printed_chars);
 }

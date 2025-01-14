@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 20:00:37 by alex              #+#    #+#             */
-/*   Updated: 2025/01/14 04:54:47 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/14 05:57:10 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ void	pbonus_di(int n, t_format *format, int *printed_chars)
 
 	str = ft_printf_itoa(n);
 	m = 0;
-	if ((format -> flags & FLAG_PLUS))
-		str = ft_strjoin(prefix(n, format), str);
+	//if ((format -> flags & FLAG_PLUS))
+	//	str = ft_strjoin(prefix(n, format), str);
 	len = ft_strlen(str);
 	if (n < 0 && format -> flags & FLAG_ZERO && !(format -> flags & FLAG_MINUS))
 	{
@@ -234,4 +234,37 @@ void	hx_padding(int len, t_format *format, int *printed_chars)
 }
 
 //%p specifier
+void	pbonus_p(void *address, t_format *format, int *printed_chars)
+{
+	unsigned long	number;
+	char			*hex;
+	char			*str;
+	int				len;
 
+	if (address == 0)
+		(*printed_chars) += ft_putstr_fd("(nil)", 1);
+	number = (unsigned long)address;
+	hex = ft_hxtoa(number, 0);
+	str = ft_strjoin("0x", hex);
+	len = ft_strlen(str);
+	if (!(format -> flags & FLAG_MINUS))
+			p_padding(len, format, printed_chars);
+	(*printed_chars) += ft_putstr_fd(str, 1); 
+	if (format -> flags & FLAG_MINUS)
+			p_padding(len, format, printed_chars);
+	free(hex);
+	free(str);
+}
+
+void	p_padding(int len, t_format *format, int *printed_chars)
+{
+	int		padding;
+
+	padding = 0;
+	if (format -> width > len)
+		padding = format -> width - len;
+	if (format -> precision > len)
+		padding = format -> precision - len;
+	while (padding--)
+		(*printed_chars) += ft_putchar_fd(' ', 1);
+}
