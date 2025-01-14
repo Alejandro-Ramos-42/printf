@@ -6,7 +6,7 @@
 /*   By: aramos <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 17:29:26 by aramos            #+#    #+#             */
-/*   Updated: 2025/01/14 01:12:19 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/14 02:46:58 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*ft_strrchr(const char *s, int c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strnstr(const char *big, const char *little, size_t len);
 int		ft_atoi(const char *nptr);
-char	*ft_hxtoa(int n, int upp);
+char	*ft_hxtoa(unsigned long n, int upp);
 char	*ft_strdup(const char *s);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
@@ -73,7 +73,7 @@ void	ft_putendl_fd(char *s, int fd);
 int		ft_putnbr_fd(int n, int fd);
 int		ft_putunbr_fd(unsigned int n, int fd);
 int		ft_print_memory(void *addr);
-int		ft_print_hex(int number, int upp);
+int		ft_print_hex(unsigned long number, int upp);
 
 //Lists
 t_list	*ft_lstnew(void *content);

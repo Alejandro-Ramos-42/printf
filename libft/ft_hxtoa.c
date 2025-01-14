@@ -6,7 +6,7 @@
 /*   By: aramos <alex.qsc2@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 08:42:10 by aramos            #+#    #+#             */
-/*   Updated: 2025/01/14 01:33:53 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/14 03:19:42 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ int	get_len(unsigned int num)
 	return (len);
 }
 
-char	*ft_hxtoa(int n, int upp)
+char	*ft_hxtoa(unsigned long n, int upp)
 {
-	unsigned int	num;
+	unsigned long	num;
 	char			*num_in_hex;
 	char			*lookup_array;
 	int				len;
 
-	num = (unsigned int)n;
+	num = (unsigned long)n;
 	len = 0;
 	if (n == 0)
 		len = 1;
@@ -64,7 +64,7 @@ static void	x_to_alpha(char *c)
 	}
 }
 
-int	ft_print_hex(int number, int upp)
+int	ft_print_hex(unsigned long number, int upp)
 {
 	char			*num_hex;
 	int				chars_printed;
