@@ -6,13 +6,14 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 20:41:11 by alex              #+#    #+#             */
-/*   Updated: 2025/01/14 13:18:03 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/15 16:55:26 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
 static void	apply_next(t_format *format, va_list args, int *printed_chars);
+static void	change_flags_d_i(t_format *format);
 
 void	apply_specifier(t_format *format, va_list args, int *printed_chars)
 {
@@ -31,7 +32,10 @@ void	apply_specifier(t_format *format, va_list args, int *printed_chars)
 	else if (format -> f_specifier == 'p')
 		pbonus_p(va_arg(args, int *), format, printed_chars);
 	else if (format-> f_specifier == 'd' || format-> f_specifier == 'i')
+	{
+		change_flags_d_i(format);
 		pbonus_di(va_arg(args, int), format, printed_chars);
+	}
 	else if (format-> f_specifier == 'u')
 	{
 		number = (unsigned int) va_arg(args, int);
@@ -57,4 +61,13 @@ static void	apply_next(t_format *format, va_list args, int *printed_chars)
 	}
 	else if (format-> f_specifier == '%')
 		*printed_chars += ft_putchar_fd('%', 1);
+}
+
+static void	change_flags_d_i(t_format *format)
+{
+	if ((format -> precision >= 0) || (format -> flags & FLAG_MINUS))
+		if (format -> flags & FLAG_ZERO)
+			format -> flags &= ~FLAG_ZERO;
+	if ((format -> flags & FLAG_PLUS) && (format -> flags & FLAG_SPACE))
+		format -> flags &= ~FLAG_SPACE;
 }

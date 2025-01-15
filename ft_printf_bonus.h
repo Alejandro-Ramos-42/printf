@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 09:45:33 by alex              #+#    #+#             */
-/*   Updated: 2025/01/14 15:13:05 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/15 18:23:28 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@
 
 typedef struct s_format
 {
-	int		m;
-	int		flags;
-	int		width;
-	int		precision;
-	char	f_specifier;
+	char		pad;
+	int			flags;
+	int			width;
+	int			precision;
+	char		f_specifier;
 }	t_format;
 
 typedef struct s_pd_params
