@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 20:00:37 by alex              #+#    #+#             */
-/*   Updated: 2025/01/15 19:35:04 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/17 13:48:38 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,17 @@ void	pbonus_di(int n, t_format *format, int *printed_chars)
 	int		len;
 	int		padding;
 
-	str = ft_printf_itoa(n);//returns possitive number in a string form
-	len = append_0(&str, format);//the length with 0s pad if needed
-	padding = pd(n, len, format, printed_chars);//prints prefix if needed and sets width pad amount
+	str = ft_printf_itoa(n);//10
+	len = append_0(&str, format);//2
+	padding = pd(n, len, format, printed_chars);//
 	if (!(format -> flags & FLAG_MINUS))//if not - flag
+	{
 		pad_helper(padding, printed_chars, format);//prints pad
-	(*printed_chars) += ft_putstr_fd(str, 1);//prints number
+		(*printed_chars) += ft_putstr_fd(prefix(n, format), 1);//print prefix
+		
+	}
+	if (!(n == 0 && ((format -> width == 0) || (format -> precision == 0))))
+		(*printed_chars) += ft_putstr_fd(str, 1);//prints number
 	format -> pad = ' ';//sets pad
 	if (format -> flags & FLAG_MINUS)//if flag - is active
 		pad_helper(padding, printed_chars, format);//prints pad
@@ -44,7 +49,7 @@ static int	append_0(char **str, t_format *format)
 
 	if (!str || !*str || !format)
 		return (0);
-	len = ft_strlen(*str);
+	len = ft_strlen(*str);//2
 	if ((format -> precision) > len)
 	{
 		difference = (format -> precision) - len;

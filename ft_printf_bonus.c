@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 09:31:38 by alex              #+#    #+#             */
-/*   Updated: 2025/01/14 15:13:58 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/17 09:00:41 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	bs(const char **str, t_format *format, va_list args, int *printed_chars)
 {
-	*format = (t_format){0, 0, 0, -1, 0};
+	*format = (t_format){' ', 0, -1, -1, 0};
 	parse_flags(str, format);
 	parse_width(str, format, args);
 	parse_precision(str, format, args);

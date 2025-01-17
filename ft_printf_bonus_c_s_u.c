@@ -6,7 +6,7 @@
 /*   By: aramos <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 06:13:54 by aramos            #+#    #+#             */
-/*   Updated: 2025/01/14 13:19:20 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/16 18:58:16 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,8 @@ void	pbonus_u(unsigned int n, t_format *format, int *printed_chars)
 {
 	char	*str;
 	int		len;
-	int		m;
 
 	str = ft_printf_utoa(n);
-	m = 0;
 	len = ft_strlen(str);
 	if (format -> flags & FLAG_ZERO)
 	{
