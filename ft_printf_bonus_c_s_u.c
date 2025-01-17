@@ -6,7 +6,7 @@
 /*   By: aramos <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 06:13:54 by aramos            #+#    #+#             */
-/*   Updated: 2025/01/16 18:58:16 by alex             ###   ########.fr       */
+/*   Updated: 2025/01/17 16:15:01 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,15 @@ void	pbonus_u(unsigned int n, t_format *format, int *printed_chars)
 	int		len;
 
 	str = ft_printf_utoa(n);
-	len = ft_strlen(str);
-	if (format -> flags & FLAG_ZERO)
-	{
-		if (format -> flags & FLAG_MINUS)
-			format -> flags = ~FLAG_ZERO;
-	}
+	if (n == 0 && (format -> precision == 0 || format -> width == 0))
+		len = 0;
+	else
+		len = append_0(&str, format);
 	if (!(format -> flags & FLAG_MINUS))
 		hm_pudding(len, format, printed_chars);
-	(*printed_chars) += ft_putstr_fd(str, 1);
+	if (!(n == 0 && (format -> precision == 0 || format -> width == 0)))
+		(*printed_chars) += ft_putstr_fd(str, 1);
+	format -> pad = ' ';
 	if (format -> flags & FLAG_MINUS)
 		hm_pudding(len, format, printed_chars);
 	free(str);
@@ -90,20 +90,12 @@ void	pbonus_u(unsigned int n, t_format *format, int *printed_chars)
 static void	hm_pudding(int len, t_format *format, int *printed_chars)
 {
 	int		padding;
-	char	c;
 
 	padding = 0;
 	if (format -> width > len)
 		padding = format -> width - len;
 	if (format -> flags & FLAG_ZERO)
-		c = '0';
-	else
-		c = ' ';
-	if (format -> precision > len)
-	{
-		padding = format -> precision - len;
-		c = '0';
-	}
+		format -> pad = '0';
 	while (padding--)
-		(*printed_chars) += ft_putchar_fd(c, 1);
+		(*printed_chars) += ft_putchar_fd(format -> pad, 1);
 }

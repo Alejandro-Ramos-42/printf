@@ -6,15 +6,14 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 20:00:37 by alex              #+#    #+#             */
-/*   Updated: 2025/01/17 13:48:38 by alex             ###   ########.fr       */
+/*   Updated: 2025/01/17 16:14:05 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-static int	pd(int n, int len, t_format *format, int *printed_chars);
+static int	pd(int n, int len, t_format *format, int *printed_chars, char **str);
 static void	pad_helper(int padding, int *printed_chars, t_format *format);
-static int	append_0(char **str, t_format *format);
 static char	*prefix(int n, t_format *format);
 
 //%d and %i specifiers
@@ -24,24 +23,23 @@ void	pbonus_di(int n, t_format *format, int *printed_chars)
 	int		len;
 	int		padding;
 
-	str = ft_printf_itoa(n);//10
-	len = append_0(&str, format);//2
-	padding = pd(n, len, format, printed_chars);//
-	if (!(format -> flags & FLAG_MINUS))//if not - flag
-	{
-		pad_helper(padding, printed_chars, format);//prints pad
-		(*printed_chars) += ft_putstr_fd(prefix(n, format), 1);//print prefix
-		
-	}
+	str = ft_printf_itoa(n);
+	if (n == 0 && ((format -> width == 0) || (format -> precision == 0)))
+		len = 0;
+	else
+		len = append_0(&str, format);
+	padding = pd(n, len, format, printed_chars, &str);
+	if (!(format -> flags & FLAG_MINUS))
+		pad_helper(padding, printed_chars, format);
 	if (!(n == 0 && ((format -> width == 0) || (format -> precision == 0))))
-		(*printed_chars) += ft_putstr_fd(str, 1);//prints number
-	format -> pad = ' ';//sets pad
-	if (format -> flags & FLAG_MINUS)//if flag - is active
-		pad_helper(padding, printed_chars, format);//prints pad
+		(*printed_chars) += ft_putstr_fd(str, 1);
+	format -> pad = ' ';
+	if (format -> flags & FLAG_MINUS)
+		pad_helper(padding, printed_chars, format);
 	free(str);
 }
 
-static int	append_0(char **str, t_format *format)
+int	append_0(char **str, t_format *format)
 {
 	int		len;
 	int		difference;
@@ -49,7 +47,7 @@ static int	append_0(char **str, t_format *format)
 
 	if (!str || !*str || !format)
 		return (0);
-	len = ft_strlen(*str);//2
+	len = ft_strlen(*str);
 	if ((format -> precision) > len)
 	{
 		difference = (format -> precision) - len;
@@ -65,23 +63,32 @@ static int	append_0(char **str, t_format *format)
 	return (len);
 }
 
-static int	pd(int n, int len, t_format *format, int *printed_chars)
+static int	pd(int n, int len, t_format *format, int *printed_chars, char **str)
 {
 	int		padding;
+	char	*new_str;
 
 	padding = 0;
 
-	if (n < 0 || format->flags & FLAG_PLUS || format->flags & FLAG_SPACE)//if sufix needed
+	if (n < 0 || format->flags & FLAG_PLUS || format->flags & FLAG_SPACE)
 	{
-		if (format -> flags & FLAG_ZERO)//if need to print sufix before padding
+		if (format -> flags & FLAG_ZERO)
 		{
-			(*printed_chars) += ft_putstr_fd(prefix(n, format), 1);//print it
-			format -> pad = '0';//change char to pad with to '0'
+			(*printed_chars) += ft_putstr_fd(prefix(n, format), 1);
+			format -> pad = '0';
 		}
-		(len)++;//add 1 to lenght no matter if '0' is on or not
+		else
+		{
+			new_str = ft_strjoin(prefix(n, format), *str);
+			free(*str);
+			*str = new_str;
+		}
+		(len)++;
 	}
-	if (format -> width > len)//if need to pad  (takes in consideration the suffix)
-		padding = (format -> width) - len;//sets the pad amount
+	if (format -> flags & FLAG_ZERO)
+		format -> pad = '0';
+	if (format -> width > len)
+		padding = (format -> width) - len;
 	return (padding);
 
 }
