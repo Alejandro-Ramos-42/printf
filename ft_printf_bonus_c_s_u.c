@@ -6,7 +6,7 @@
 /*   By: aramos <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 06:13:54 by aramos            #+#    #+#             */
-/*   Updated: 2025/01/17 16:15:01 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/17 17:57:17 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,21 @@ void	pbonus_s(const char *str, t_format *format
 	int	len;
 	int	padding;
 
-	len = ft_strlen(str);
+	len = ft_strlen(str);//12
 	padding = 0;
-	if (format -> width > len)
-		padding = format -> width - len;
-	if (format -> width == '*' && va_arg(args, int) > len)
+	if (format -> width > len)//yes
+		padding = format -> width - len;//30
+	else if (format -> width == '*' && va_arg(args, int) > len)
 		padding = va_arg(args, int) - len;
 	if (format -> precision >= 0 && format -> precision < len)
 		len = format -> precision;
-	if (format -> width > format -> precision && format -> precision != -1)
-		padding = format -> width - format -> precision;
+	if ((format -> width) > (format -> precision) && format -> precision != -1)
+		padding = (format -> width) - (format -> precision);
 	if (!(format -> flags & FLAG_MINUS))
 		pbonus_s_pad(padding, printed_chars);
 	write(1, str, len);
 	*printed_chars += len;
-	if (format -> flags & FLAG_MINUS
-		&& format -> f_specifier != 'd' && format -> f_specifier != 'i')
+	if (format -> flags & FLAG_MINUS)
 		pbonus_s_pad(padding, printed_chars);
 }
 
