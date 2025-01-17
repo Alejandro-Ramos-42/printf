@@ -6,13 +6,13 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 15:20:33 by alex              #+#    #+#             */
-/*   Updated: 2025/01/17 09:03:02 by alex             ###   ########.fr       */
+/*   Updated: 2025/01/17 18:15:04 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-void	parse_flags(const char **str, t_format *format)
+void	parse_flags(const char **str, t_form *format)
 {
 	while (**str == '-' || **str == '0' || **str == '#' || \
 **str == '+' || **str == ' ')
@@ -31,7 +31,7 @@ void	parse_flags(const char **str, t_format *format)
 	}
 }
 
-void	parse_width(const char **str, t_format *format, va_list args)
+void	parse_width(const char **str, t_form *format, va_list args)
 {
 	if (**str >= '0' && **str <= '9')
 	{
@@ -46,7 +46,7 @@ void	parse_width(const char **str, t_format *format, va_list args)
 	}
 }
 
-void	parse_precision(const char **str, t_format *format, va_list args)
+void	parse_precision(const char **str, t_form *format, va_list args)
 {
 	if (**str == '.')
 	{
@@ -67,7 +67,7 @@ void	parse_precision(const char **str, t_format *format, va_list args)
 	}
 }
 
-void	parse_specifier(const char **str, t_format *format)
+void	parse_specifier(const char **str, t_form *format)
 {
 	format -> f_specifier = **str;
 }

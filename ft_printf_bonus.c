@@ -6,27 +6,27 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 09:31:38 by alex              #+#    #+#             */
-/*   Updated: 2025/01/17 09:00:41 by alex             ###   ########.fr       */
+/*   Updated: 2025/01/17 19:41:14 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-void	bs(const char **str, t_format *format, va_list args, int *printed_chars)
+void	bs(const char **str, t_form *format, va_list args)
 {
-	*format = (t_format){' ', 0, -1, -1, 0};
+	*format = (t_form){' ', 0, -1, -1, 0, 0};
 	parse_flags(str, format);
 	parse_width(str, format, args);
 	parse_precision(str, format, args);
 	parse_specifier(str, format);
-	apply_specifier(format, args, printed_chars);
+	apply_specifier(format, args);
 }
 
 int	ft_printf(const char *str, ...)
 {
 	va_list		args;
 	int			printed_chars;
-	t_format	format;
+	t_form	format;
 
 	printed_chars = 0;
 	va_start(args, str);
@@ -35,7 +35,7 @@ int	ft_printf(const char *str, ...)
 		if (*str == '%')
 		{
 			str++;
-			bs(&str, &format, args, &printed_chars);
+			bs(&str, &format, args);
 		}
 		else if (*str != '%')
 		{

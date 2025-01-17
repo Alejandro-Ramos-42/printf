@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 09:45:33 by alex              #+#    #+#             */
-/*   Updated: 2025/01/17 16:10:50 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/17 19:39:30 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,27 +29,20 @@ typedef struct s_format
 	int			width;
 	int			precision;
 	char		f_specifier;
-}	t_format;
-
-typedef struct s_pd_params
-{
-    int len;
-    int m;
-    t_format *format;
-    int *printed_chars;
-} t_params;
+	int			p_chars;
+}	t_form;
 
 int		ft_printf(const char *str, ...);
-void	bs(const char **str, t_format *format, va_list args, int *printed_chars);
-void	parse_flags(const char **str, t_format *format);
-void	parse_width(const char **str, t_format *format, va_list args);
-void	parse_precision(const char **str, t_format *format, va_list args);
-void	parse_specifier(const char **str, t_format *format);
-void	apply_specifier(t_format *format, va_list args, int *printed_chars);
-void	pbonus_c(char c, t_format *format, int *printed_chars);
-void	pbonus_s(const char *str, t_format *format, va_list args, int *printed_chars);
-void	pbonus_di(int n, t_format *format, int *printed_chars);
-void	pbonus_u(unsigned int n, t_format *format, int *printed_chars);
-void	print_hx(unsigned int n, t_format *format, int upp, int *printed_chars);
-void	pbonus_p(void *address, t_format *format, int *printed_chars);
-int		append_0(char **str, t_format *format);
+void	bs(const char **str, t_form *format, va_list args);
+void	parse_flags(const char **str, t_form *format);
+void	parse_width(const char **str, t_form *format, va_list args);
+void	parse_precision(const char **str, t_form *format, va_list args);
+void	parse_specifier(const char **str, t_form *format);
+void	apply_specifier(t_form *format, va_list args);
+void	pbonus_c(char c, t_form *format);
+void	pbonus_s(const char *str, t_form *format, va_list args);
+void	pbonus_di(int n, t_form *format);
+void	pbonus_u(unsigned int n, t_form *format);
+void	print_hx(unsigned int n, t_form *format, int upp);
+void	pbonus_p(void *address, t_form *format);
+int		append_0(char **str, t_form *format);
