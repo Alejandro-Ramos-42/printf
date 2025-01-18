@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 09:31:38 by alex              #+#    #+#             */
-/*   Updated: 2025/01/17 19:41:14 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/18 08:10:28 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 
 void	bs(const char **str, t_form *format, va_list args)
 {
-	*format = (t_form){' ', 0, -1, -1, 0, 0};
+	format -> pad = ' ';
+	format -> flags = 0;
+	format -> width = -1;
+	format -> precision = -1;
+	format -> f_specifier = 0;
 	parse_flags(str, format);
 	parse_width(str, format, args);
 	parse_precision(str, format, args);
@@ -25,10 +29,9 @@ void	bs(const char **str, t_form *format, va_list args)
 int	ft_printf(const char *str, ...)
 {
 	va_list		args;
-	int			printed_chars;
-	t_form	format;
+	t_form		format;
 
-	printed_chars = 0;
+	format.p_chars = 0;
 	va_start(args, str);
 	while (*str)
 	{
@@ -37,13 +40,16 @@ int	ft_printf(const char *str, ...)
 			str++;
 			bs(&str, &format, args);
 		}
-		else if (*str != '%')
+		else
 		{
 			ft_putchar_fd(*str, 1);
-			printed_chars++;
+			format.p_chars++;
 		}
 		str++;
 	}
 	va_end(args);
-	return (printed_chars);
+	return (format.p_chars);
 }
+//	current_p_chars = format -> p_chars;
+//	*format = (t_form){' ', 0, -1, -1, 0, 0};
+//	format -> p_chars = current_p_chars;

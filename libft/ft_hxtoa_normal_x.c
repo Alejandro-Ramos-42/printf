@@ -6,7 +6,7 @@
 /*   By: aramos <alex.qsc2@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 08:42:10 by aramos            #+#    #+#             */
-/*   Updated: 2025/01/14 11:39:09 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/18 08:22:31 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	x_to_alpha_normal_x(char *c);
 
-int	get_len_normal_x(unsigned num)
+int	get_len_normal_x(unsigned int num)
 {
 	int	len;
 

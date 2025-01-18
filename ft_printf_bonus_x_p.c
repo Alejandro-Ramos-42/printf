@@ -6,7 +6,7 @@
 /*   By: aramos <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 06:18:20 by aramos            #+#    #+#             */
-/*   Updated: 2025/01/17 20:03:48 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/18 08:06:28 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	p_padding(int len, t_form *format);
 static void	hx_padding(int len, t_form *format);
 
 //%x specifier
-void	print_hx(unsigned int n, t_form *format, int upp, int format->p_chars)
+void	print_hx(unsigned int n, t_form *format, int upp)
 {
 	int		len;
 	char	*str;
@@ -35,15 +35,15 @@ void	print_hx(unsigned int n, t_form *format, int upp, int format->p_chars)
 		len += 2;
 	}
 	if (!(format -> flags & FLAG_MINUS))
-		hx_padding(len, format, printed_chars);
-	if(!(n == 0 && (format -> width == 0 || format -> precision == 0)))
+		hx_padding(len, format);
+	if (!(n == 0 && (format -> width == 0 || format -> precision == 0)))
 		(format->p_chars) += ft_putstr_fd(str, 1);
 	if (format -> flags & FLAG_MINUS)
-		hx_padding(len, format, printed_chars);
+		hx_padding(len, format);
 	free(str);
 }
 
-static void	hx_padding(int len, t_form *format, int format->p_chars)
+static void	hx_padding(int len, t_form *format)
 {
 	int		padding;
 
@@ -57,7 +57,7 @@ static void	hx_padding(int len, t_form *format, int format->p_chars)
 }
 
 //%p specifier
-void	pbonus_p(void *address, t_form *format, int format->p_chars)
+void	pbonus_p(void *address, t_form *format)
 {
 	unsigned long	number;
 	char			*hex;
@@ -75,15 +75,15 @@ void	pbonus_p(void *address, t_form *format, int format->p_chars)
 		str = ft_strjoin("0x", hex);
 	len = ft_strlen(str);
 	if (!(format -> flags & FLAG_MINUS))
-		p_padding(len, format, printed_chars);
+		p_padding(len, format);
 	(format->p_chars) += ft_putstr_fd(str, 1);
 	if (format -> flags & FLAG_MINUS)
-		p_padding(len, format, printed_chars);
+		p_padding(len, format);
 	free(hex);
 	free(str);
 }
 
-static void	p_padding(int len, t_form *format, int format->p_chars)
+static void	p_padding(int len, t_form *format)
 {
 	int		padding;
 

@@ -6,7 +6,7 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 09:45:33 by alex              #+#    #+#             */
-/*   Updated: 2025/01/17 19:39:30 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/18 08:07:26 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include "libft/libft.h"
-#include <stdio.h>
 
 #define FLAG_MINUS	1//00000001
 #define FLAG_ZERO	2//00000010

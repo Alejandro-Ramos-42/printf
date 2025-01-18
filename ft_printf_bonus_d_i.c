@@ -6,18 +6,18 @@
 /*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 20:00:37 by alex              #+#    #+#             */
-/*   Updated: 2025/01/17 19:57:29 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/18 08:05:57 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
 static int	pd(int n, int len, t_form *format, char **str);
-static void	pad_helper(int padding, int *t_form->p_chars, t_form *format);
+static void	pad_helper(int padding, t_form *format);
 static char	*prefix(int n, t_form *format);
 
 //%d and %i specifiers
-void	pbonus_di(int n, t_form *format, int *t_form->p_chars)
+void	pbonus_di(int n, t_form *format)
 {
 	char	*str;
 	int		len;
@@ -28,14 +28,14 @@ void	pbonus_di(int n, t_form *format, int *t_form->p_chars)
 		len = 0;
 	else
 		len = append_0(&str, format);
-	padding = pd(n, len, format, t_form->p_chars, &str);
+	padding = pd(n, len, format, &str);
 	if (!(format -> flags & FLAG_MINUS))
-		pad_helper(padding, t_form->p_chars, format);
+		pad_helper(padding, format);
 	if (!(n == 0 && ((format -> width == 0) || (format -> precision == 0))))
-		(*t_form->p_chars) += ft_putstr_fd(str, 1);
+		(format->p_chars) += ft_putstr_fd(str, 1);
 	format -> pad = ' ';
 	if (format -> flags & FLAG_MINUS)
-		pad_helper(padding, t_form->p_chars, format);
+		pad_helper(padding, format);
 	free(str);
 }
 
@@ -69,12 +69,11 @@ static int	pd(int n, int len, t_form *format, char **str)
 	char	*new_str;
 
 	padding = 0;
-
 	if (n < 0 || format->flags & FLAG_PLUS || format->flags & FLAG_SPACE)
 	{
 		if (format -> flags & FLAG_ZERO)
 		{
-			(*t_form->p_chars) += ft_putstr_fd(prefix(n, format), 1);
+			(format->p_chars) += ft_putstr_fd(prefix(n, format), 1);
 			format -> pad = '0';
 		}
 		else
@@ -90,7 +89,6 @@ static int	pd(int n, int len, t_form *format, char **str)
 	if (format -> width > len)
 		padding = (format -> width) - len;
 	return (padding);
-
 }
 
 static char	*prefix(int n, t_form *format)
@@ -104,8 +102,8 @@ static char	*prefix(int n, t_form *format)
 	return ("");
 }
 
-static void	pad_helper(int padding, int *t_form->p_chars, t_form *format)
+static void	pad_helper(int padding, t_form *format)
 {
 	while (padding--)
-		(*t_form->p_chars) += ft_putchar_fd(format -> pad, 1);
+		(format->p_chars) += ft_putchar_fd(format -> pad, 1);
 }

@@ -6,7 +6,7 @@
 /*   By: aramos <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:52:49 by aramos            #+#    #+#             */
-/*   Updated: 2025/01/16 18:56:39 by alex             ###   ########.fr       */
+/*   Updated: 2025/01/18 08:23:11 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ char	*ft_printf_utoa(unsigned int n)
 	int				len;
 
 	num = (long)n;
-//	if (n < 0)
-//		num = -num;
 	len = num_len(num);
 	result = (char *) malloc((len + 1) * sizeof(char));
 	if (!result)

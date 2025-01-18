@@ -6,7 +6,7 @@
 /*   By: aramos <alex.qsc2@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 08:42:10 by aramos            #+#    #+#             */
-/*   Updated: 2025/01/14 11:28:35 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/18 08:22:56 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_print_memory(void *addr)
 {
-	int		counter;
+	int				counter;
 	unsigned long	address_in_dec;
 
 	counter = 0;

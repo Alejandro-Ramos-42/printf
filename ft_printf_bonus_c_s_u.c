@@ -6,7 +6,7 @@
 /*   By: aramos <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 06:13:54 by aramos            #+#    #+#             */
-/*   Updated: 2025/01/17 20:02:30 by aramos           ###   ########.fr       */
+/*   Updated: 2025/01/18 07:59:34 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	pbonus_c(char c, t_form *format)
 		while (padding-- > 0)
 			(format->p_chars) += ft_putchar_fd(' ', 1);
 	}
-	(format->p_chars) += ft_putchar_fd(c, 1);
+	format->p_chars += ft_putchar_fd(c, 1);
 	if (format -> flags & FLAG_MINUS)
 	{
 		while (padding-- > 0)
