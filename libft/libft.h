@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aramos <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: aramos <alejandro.ramos.gua@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 17:29:26 by aramos            #+#    #+#             */
-/*   Updated: 2025/01/18 08:23:45 by aramos           ###   ########.fr       */
+/*   Created: 2025/02/21 15:04:15 by aramos            #+#    #+#             */
+/*   Updated: 2025/02/21 15:04:40 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
-//Filter
+// Filter
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
@@ -34,7 +34,7 @@ int		ft_isascii(int c);
 int		ft_isprint(int c);
 size_t	ft_strlen(const char *s);
 
-//Memory handling
+// Memory handling
 void	*ft_memset(void *s, int c, size_t n);
 void	ft_bzero(void *s, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
@@ -43,7 +43,7 @@ void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
 
-//String actions
+// String actions
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 int		ft_toupper(int c);
@@ -65,7 +65,7 @@ char	*ft_printf_utoa(unsigned int n);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 
-//Visible output
+// Visible output
 int		ft_putchar_fd(char c, int fd);
 int		ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
@@ -73,10 +73,8 @@ int		ft_putnbr_fd(int n, int fd);
 int		ft_putunbr_fd(unsigned int n, int fd);
 int		ft_print_memory(void *addr);
 int		ft_print_hex(unsigned long number, int upp);
-int		ft_print_hex_normal(unsigned long number, int upp);
-int		ft_print_hex_normal_x(unsigned long number, int upp);
 
-//Lists
+// Linked lists
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 int		ft_lstsize(t_list *lst);

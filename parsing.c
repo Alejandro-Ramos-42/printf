@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_bonus.c                                    :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: aramos <alejandro.ramos.gua@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/31 15:20:33 by alex              #+#    #+#             */
-/*   Updated: 2025/01/17 18:15:04 by aramos           ###   ########.fr       */
+/*   Created: 2025/02/21 11:36:39 by aramos            #+#    #+#             */
+/*   Updated: 2025/02/21 11:36:43 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
 
 void	parse_flags(const char **str, t_form *format)
 {

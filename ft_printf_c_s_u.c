@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_bonus_c_s_u.c                            :+:      :+:    :+:   */
+/*   ft_printf_c_s_u.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aramos <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: aramos <alejandro.ramos.gua@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/14 06:13:54 by aramos            #+#    #+#             */
-/*   Updated: 2025/01/18 07:59:34 by aramos           ###   ########.fr       */
+/*   Created: 2025/02/21 11:37:14 by aramos            #+#    #+#             */
+/*   Updated: 2025/02/21 11:37:19 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
 
 static void	hm_pudding(int len, t_form *format);
 static void	pbonus_s_pad(int padding, t_form *format);

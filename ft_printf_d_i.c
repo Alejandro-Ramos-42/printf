@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_bonus_d_i.c                              :+:      :+:    :+:   */
+/*   ft_printf_d_i.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: aramos <alejandro.ramos.gua@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/31 20:00:37 by alex              #+#    #+#             */
-/*   Updated: 2025/01/18 08:05:57 by aramos           ###   ########.fr       */
+/*   Created: 2025/02/21 11:37:29 by aramos            #+#    #+#             */
+/*   Updated: 2025/02/21 11:37:34 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
 
 static int	pd(int n, int len, t_form *format, char **str);
 static void	pad_helper(int padding, t_form *format);

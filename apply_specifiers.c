@@ -3,38 +3,87 @@
 /*                                                        :::      ::::::::   */
 /*   apply_specifiers.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alex <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: aramos <alejandro.ramos.gua@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/31 20:41:11 by alex              #+#    #+#             */
-/*   Updated: 2025/01/14 11:38:26 by aramos           ###   ########.fr       */
+/*   Created: 2025/02/21 11:36:57 by aramos            #+#    #+#             */
+/*   Updated: 2025/02/21 11:37:02 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	apply_specifier(t_format *format, va_list *args, int *printed_chars)
+static void	apply_next_0(t_form *format, va_list args);
+static void	apply_next_1(t_form *format, va_list args);
+static void	change_flags(t_form *format);
+
+void	apply_specifier(t_form *format, va_list args)
 {
-	char	*str;
+	const char		*str;
 
 	if (format-> f_specifier == 'c')
-		*printed_chars += ft_putchar_fd((char)va_arg(*args, int), 1);
-	else if (format-> f_specifier == 's')
+		pbonus_c((char)va_arg(args, int), format);
+	if (format-> f_specifier == 's')
 	{
-		str = va_arg(*args, char *);
+		str = va_arg(args, char *);
 		if (!str)
-			str = "(null)";
-		*printed_chars += ft_putstr_fd(str, 1);
+		{
+			if (!(format -> precision >= 6 || format -> precision < 0))
+				return ;
+			else
+				str = "(null)";
+		}
+		pbonus_s(str, format, args);
 	}
-	else if (format-> f_specifier == 'p')
-		*printed_chars += ft_print_memory(va_arg(*args, int *));
+	else
+		apply_next_0(format, args);
+}
+
+static void	apply_next_0(t_form *format, va_list args)
+{
+	unsigned int	number;
+
+	if (format -> f_specifier == 'p')
+		pbonus_p(va_arg(args, int *), format);
 	else if (format-> f_specifier == 'd' || format-> f_specifier == 'i')
-		*printed_chars += ft_putnbr_fd(va_arg(*args, int), 1);
+	{
+		change_flags(format);
+		pbonus_di(va_arg(args, int), format);
+	}
 	else if (format-> f_specifier == 'u')
-		*printed_chars += ft_putunbr_fd(va_arg(*args, int), 1);
-	else if (format-> f_specifier == 'x')
-		*printed_chars += ft_print_hex_normal_x(va_arg(*args, int), 0);
-	else if (format-> f_specifier == 'X')
-		*printed_chars += ft_print_hex_normal_x(va_arg(*args, int), 1);
-	else if (format-> f_specifier == '%')
-		*printed_chars += ft_putchar_fd('%', 1);
+	{
+		number = (unsigned int) va_arg(args, int);
+		change_flags(format);
+		pbonus_u(number, format);
+	}
+	else
+		apply_next_1(format, args);
+}
+
+static void	apply_next_1(t_form *format, va_list args)
+{
+	unsigned int	number;
+
+	if (format -> f_specifier == 'x')
+	{
+		number = (unsigned )va_arg(args, int);
+		change_flags(format);
+		print_hx(number, format, 0);
+	}
+	else if (format -> f_specifier == 'X')
+	{
+		number = (unsigned) va_arg(args, int);
+		change_flags(format);
+		print_hx(number, format, 1);
+	}
+	else if (format -> f_specifier == '%')
+		format->p_chars += ft_putchar_fd('%', 1);
+}
+
+static void	change_flags(t_form *format)
+{
+	if ((format -> precision >= 0) || (format -> flags & FLAG_MINUS))
+		if (format -> flags & FLAG_ZERO)
+			format -> flags &= ~FLAG_ZERO;
+	if ((format -> flags & FLAG_PLUS) && (format -> flags & FLAG_SPACE))
+		format -> flags &= ~FLAG_SPACE;
 }

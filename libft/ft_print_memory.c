@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_memory.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aramos <alex.qsc2@gmail.com>               +#+  +:+       +#+        */
+/*   By: aramos <alejandro.ramos.gua@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/16 08:42:10 by aramos            #+#    #+#             */
-/*   Updated: 2025/01/18 08:22:56 by aramos           ###   ########.fr       */
+/*   Created: 2025/02/21 12:58:44 by aramos            #+#    #+#             */
+/*   Updated: 2025/02/21 12:58:46 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ int	ft_print_memory(void *addr)
 	if (addr == NULL)
 		return (ft_putstr_fd(("(nil)"), 1));
 	counter += ft_putstr_fd("0x", 1);
-	counter += ft_print_hex_normal(address_in_dec, 0);
+	counter += ft_print_hex(address_in_dec, 0);
 	return (counter);
 }

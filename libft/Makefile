@@ -25,8 +25,6 @@ SRC = \
 	ft_substr.c\
 	ft_itoa.c\
 	ft_hxtoa.c\
-	ft_hxtoa_normal.c\
-	ft_hxtoa_normal_x.c\
 	ft_printf_itoa.c\
 	ft_printf_utoa.c\
 	ft_strjoin.c\

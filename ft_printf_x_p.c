@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_bonus_x_p.c                              :+:      :+:    :+:   */
+/*   ft_printf_x_p.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aramos <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: aramos <alejandro.ramos.gua@gmail.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/14 06:18:20 by aramos            #+#    #+#             */
-/*   Updated: 2025/01/18 08:06:28 by aramos           ###   ########.fr       */
+/*   Created: 2025/02/21 11:37:44 by aramos            #+#    #+#             */
+/*   Updated: 2025/02/21 11:37:49 by aramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
 
 static void	p_padding(int len, t_form *format);
 static void	hx_padding(int len, t_form *format);

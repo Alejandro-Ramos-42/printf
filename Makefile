@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: aramos <alejandro.ramos.gua@gmail.com>     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/02/21 11:26:10 by aramos            #+#    #+#              #
+#    Updated: 2025/02/21 11:27:02 by aramos           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 # Compiler and Flags
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
@@ -10,29 +22,22 @@ INCDIR = ./libft
 NAME = libftprintf.a
 LIBFT = $(LIBFTDIR)/libft.a
 
-# Source Files
+# Files
 SRC = ./ft_printf.c\
-	  ./apply_specifiers.c
+	   ./parsing.c\
+	   ./apply_specifiers.c\
+	   ./ft_printf_c_s_u.c\
+	   ./ft_printf_x_p.c\
+	   ./ft_printf_d_i.c
 
 OBJ = $(SRC:.c=.o)
 
-#Bonus Files
-BSRC = ./ft_printf_bonus.c\
-	   ./parsing_bonus.c\
-	   ./apply_specifiers_bonus.c\
-	   ./ft_printf_bonus_c_s_u.c\
-	   ./ft_printf_bonus_x_p.c\
-	   ./ft_printf_bonus_d_i.c
-
-BOBJ = $(BSRC:.c=.o)
-
 # Create the static library for ft_printf
 $(NAME): $(OBJ) $(LIBFT)
-	@cp $(LIBFT) .
-	#@ar x libft.a
+	@cp $(LIBFT) libft.a
 	@ar rcs libft.a $(OBJ)
-	mv libft.a $(NAME)
-	#@rm -f *.o libft.a
+	@mv libft.a $(NAME)
+	@rm *.o
 
 # Compile .c files into .o files
 %.o: %.c
@@ -40,13 +45,6 @@ $(NAME): $(OBJ) $(LIBFT)
 
 # Build both libft and ft_printf libraries
 all: $(LIBFT) $(NAME)
-
-#Bonus rule
-bonus: $(NAME) $(BOBJ)
-	@cp $(LIBFT) .
-	#@ar x libft.a
-	@ar rcs libft.a $(BOBJ)
-	mv libft.a $(NAME)
 
 # Build libft first
 $(LIBFT):
